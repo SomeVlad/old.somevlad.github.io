@@ -27,19 +27,19 @@ Chrome 55 returned a mysterious error: "Discontiguous selection is not supported
 So what should we do? Well, if Chrome thinks there is a some kind of "discontiguousness" happening, maybe we should clear all selections first, to tell him there is only one contiguous selection? 
 So I just tried to call this function before all that copying shenanigans start:
 
-```
+```js
 function clearSelection() {
     if (document.selection) {
          document.selection.empty();
     } else if (window.getSelection) {
         window.getSelection().removeAllRanges();
     }
-}` 
+}
 ```
 
 And it worked! So the whole "copy to clipboard" logic looks like this:
 
-```
+```js
 let copyEmailBtn = document.querySelector('.copyToClipboardBtn');
 document.queryCommandSupported('copy') ?
     (copyEmailBtn.addEventListener('click', (event) => {
