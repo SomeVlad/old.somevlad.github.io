@@ -1,5 +1,5 @@
 # Site settings
-title:       Frontend developer Vlad Samoylov
+title:       Vlad Samoylov
 email:       samoylov.dev@gmail.com
 author:      Vlad Samoylov
 description: "Frontend developer Vlad Samoylov's portfolio"
@@ -115,7 +115,7 @@ markdown:     kramdown
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    pretty
-paginate:     4
+paginate:     10
 sass:
   style: compressed
 gems:
