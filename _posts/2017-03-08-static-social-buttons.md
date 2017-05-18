@@ -68,5 +68,10 @@ Of course, it should be used with `target="_blank"`, so don't forget about [secu
 
 ### I smell big fat "but" waiting 'round the corner
 
-If you prefer easier but less flexible and more data-hungry and time-wasting way over one requiring a little work but granting full control of your site – yes, there is one "but". You have to manually add icons and generate texts and URL's for sharing. As for me, that's not the case, because it's quite simple thing to do. And it is overweights the stupid amount of executable scripts, unnecessary cross-domain AJAX queries and lack of control.
+If you prefer easier but less flexible and more data-hungry and time-wasting way over one requiring 
+a little work but granting full control of your site – yes, there is one "but". 
+You have to manually add icons and generate texts and URL's for sharing. 
+As for me, that's not the case, because it's quite simple thing to do. And it is overweights the stupid amount 
+of executable scripts, unnecessary cross-domain AJAX queries and lack of control.
+
 So think twice.
