@@ -22,7 +22,7 @@ Create an `<a>` element with proper href attribute and you are good to go.
 For Facebook (it opens a dialog that looks horrible on wide screens, so I decided it will be more correctly to open link in a popup):
 
 ```js
-onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ URL you want users to share }}', 'pop', 'width=600, height=400, scrollbars=no');"
+onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={ URL you want users to share }', 'pop', 'width=600, height=400, scrollbars=no');"
 ```
 
 Yep, that easy.
@@ -31,37 +31,37 @@ ________________
 For Twitter:
 
 ```js
-href="https://twitter.com/intent/tweet?text={{ text you want to appear in textbox before the url }}&url={{ URL you want users to share }}"
+href="https://twitter.com/intent/tweet?text={ text you want to appear in textbox before the url }&url={ URL you want users to share }"
 ```
 
 For VK:
 
 ```js
-href="https://vk.com/share.php?url={{ URL }}"
+href="https://vk.com/share.php?url={ URL }"
 ```
 
 For Telegram:
 
 ```js
-href="https://telegram.me/share/url?text={{ Text that will appear under the link }}&url={{ URL }}"
+href="https://telegram.me/share/url?text={ Text that will appear under the link }&url={ URL }"
 ```
 
 For Pinterest:
 
 ```js
-href="https://pinterest.com/pin/create/button/?description={{ Text for a pin }}&url={{ URL to share }}"
+href="https://pinterest.com/pin/create/button/?description={ Text for a pin }&url={ URL to share }"
 ```
 
 For Skype:
 
 ```js
-href="https://web.skype.com/share?url={{ URL }}"
+href="https://web.skype.com/share?url={ URL }"
 ```
 
 For LinkedIn:
 
 ```js
-href="http://www.linkedin.com/shareArticle?mini=true&url={{ URL }}&title={{ Title }}&summary={{ Summary }}"
+href="http://www.linkedin.com/shareArticle?mini=true&url={ URL }&title={ Title }&summary={ Summary }"
 ```
 
 Of course, it should be used with `target="_blank"`, so don't forget about [security](https://mathiasbynens.github.io/rel-noopener/).
