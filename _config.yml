@@ -2,7 +2,7 @@
 title:       Vlad Samoylov
 email:       samoylov.dev@gmail.com
 author:      Vlad Samoylov
-description: "Frontend developer Vlad Samoylov's portfolio"
+description: "Frontend developer Vlad Samoylov's blog"
 baseurl:     ""
 url:         "https://vladsamoylov.ru"
 date_format: "%-d %b, %Y"
@@ -30,8 +30,10 @@ post_preview_image: true
 
 # Facebook Page integration
 # (for instant articles and other stuff)
-fb_page: false
-fb_page_id:
+fb_page: true
+fb_page_id: 1668450876797501
+
+
 
 # Disqus post comments
 # (leave blank to disable Disqus)
