@@ -13,7 +13,7 @@ There are a lot of social networks now, that provide ability to share some webpa
 
 What you see is an easy way to add several buttons on your site.
 
-What I see is at least 150kB of external scripts and at least 5 more requests. That's almost 2.5 times the size of the page you are viewing right now. I prefer not to even think about the time needed to execute all that scripts. As for me it's insane amount of data and time to create a couple of buttons which let users not to worry their pretty little heads about copypasting a link.
+What I see is at least 150kB of external scripts and at least 5 more requests. That's **13&nbsp;times** the size of the page you are viewing right now. I prefer not to even think about the time needed to execute all that scripts. As for me it's insane amount of data and time to create a couple of buttons which let users not to worry their pretty little heads about copypasting a link.
 
 ### Ok, I see... So what's the solution?
 
