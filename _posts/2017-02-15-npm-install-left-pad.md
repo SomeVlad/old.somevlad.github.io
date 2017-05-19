@@ -60,7 +60,7 @@ and say «Hey guys, that’s not acceptable to rely on such basic functionality 
 are we programmers or what, also look, there are even worse packages, OMG, look at what we’ve become, 
 let’s do something about this!»
 
-Well, I guess, it’s not the correct angle this problem have to be observed from.
+Well, I guess, it’s not the correct angle this problem has to be observed from.
 
 ### NPM is good
 
