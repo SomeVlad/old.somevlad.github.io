@@ -4,6 +4,7 @@ title:      Static social share buttons
 date:       2017-03-08 18:00:00
 summary:    If you want to let your users share your site and don't want to load a bunch of useless SDKs, there is a way.
 permalink:  /static-social-buttons/
+og_image:   {{ site.url }}/images/og_static-social-buttons.png
 ---
 
 ### Why should it even bother me?
