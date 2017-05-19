@@ -11,7 +11,7 @@ layout: null
       {% if site.description %}{{ site.description | xml_escape }}{% endif %}
     </description>
     {% for post in site.posts %}
-        {% unless post.link %}
+        {% unless post.link or post.no_instant %}
             <item>
                 <title>{{ post.title | xml_escape }}</title>
                 <link>{{ site.url }}{{ post.url }}</link>
