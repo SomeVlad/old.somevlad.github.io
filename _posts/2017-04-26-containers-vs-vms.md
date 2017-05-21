@@ -6,6 +6,7 @@ summary:    If you ever thought about differences between say Vagrant + VirtualB
 permalink:  /containers-vs-vms/
 og_image:   containers-vs-vms.png
 ---
-<img src="{{ site.baseurl }}/images/og/containers-vs-vms.png" alt="Containers vs VMs" width="770" height="434" />
+
+<img src="{{ site.baseurl }}/images/og/containers-vs-vms.png" alt="Containers vs VMs" style="width: 100%; height:56.4%"/>
 
 [Origin](http://www.zdnet.com/article/what-is-docker-and-why-is-it-so-darn-popular/).
