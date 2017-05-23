@@ -22,6 +22,7 @@ tags: about
 - backbone 
 - progressive web apps
 
+
 ### Linkz 
 - [CV](/static/vlad_samoylov_CV.pdf){:target="_blank" rel="noopener noreferrer"}
 - [CV](/static/vlad_samoylov_CV_rus.pdf){:target="_blank" rel="noopener noreferrer"} 🇷🇺
