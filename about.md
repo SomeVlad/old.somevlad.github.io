@@ -5,4 +5,31 @@ permalink: /about/
 tags: about
 ---
 
-blah blah react blah blah redux blah blah es6
+
+👨🏻‍💻
+
+
+### Buzzwords I know of
+- react
+- redux 
+- es6 
+- html5 
+- css3 
+- svg 
+- canvas 
+- gulp
+- webpack 
+- backbone 
+- progressive web apps
+
+### Linkz 
+- [CV](/static/vlad_samoylov_CV.pdf){:target="_blank" rel="noopener noreferrer"}
+- [CV](/static/vlad_samoylov_CV_rus.pdf){:target="_blank" rel="noopener noreferrer"} 🇷🇺
+- [github](https://github.com/somevlad){:target="_blank" rel="noopener noreferrer"}
+- [linkedin](https://www.linkedin.com/in/vladislav-samoylov-136606b9/){:target="_blank" rel="noopener noreferrer"}
+- [twitter](https://twitter.com/somevlad){:target="_blank" rel="noopener noreferrer"}
+- [facebook](https://www.facebook.com/SomeVlad){:target="_blank" rel="noopener noreferrer"}
+- [vk](https://vk.com/some_vlad){:target="_blank" rel="noopener noreferrer"}
+- [instagram](https://instagram.com/some_vlad){:target="_blank" rel="noopener noreferrer"}
+- [telegram](https://t.me/some_vlad){:target="_blank" rel="noopener noreferrer"} 
+([channel](https://t.me/vladsamoylov){:target="_blank" rel="noopener noreferrer"})
