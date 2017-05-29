@@ -7,7 +7,7 @@ permalink:  /static-social-buttons/
 og_image:   static-social-buttons.png
 ---
 *edit:*
-I made a [generator]({{ site.baseurl }}{% post_url 2017-05-26-social-buttons-generator %}) for you to use.
+I made a [generator]({{ site.baseurl }}{% post_url 2017-05-29-social-buttons-generator %}) for you to use.
 
 ## Why should it even bother me?
 
