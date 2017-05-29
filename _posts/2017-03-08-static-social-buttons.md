@@ -6,8 +6,10 @@ summary:    If you want to let your users share your site and don't want to load
 permalink:  /static-social-buttons/
 og_image:   static-social-buttons.png
 ---
+*edit:*
+I made a [generator]({{ site.baseurl }}{% post_url 2017-05-26-social-buttons-generator %}) for you to use.
 
-### Why should it even bother me?
+## Why should it even bother me?
 
 There are a lot of social networks now, that provide ability to share some webpage. And most of them have this feature covered in their API documentation. And [oftentimes](https://developers.facebook.com/docs/plugins/share-button) [it](https://developers.google.com/+/web/share/) [requires](https://vk.com/dev.php?method=Share) [an SDK](https://dev.twitter.com/web/tweet-button) [of that social network](https://developers.pinterest.com/docs/widgets/save/).
 
@@ -15,7 +17,7 @@ What you see is an easy way to add several buttons on your site.
 
 What I see is at least 150kB of external scripts and at least 5 more requests. That's **13&nbsp;times** the size of the page you are viewing right now. I prefer not to even think about the time needed to execute all that scripts. As for me it's insane amount of data and time to create a couple of buttons which let users not to worry their pretty little heads about copypasting a link.
 
-### Ok, I see... So what's the solution?
+## Ok, I see... So what's the solution?
 
 I recently discovered that the exact same thing can be accomplished much easier. What it requires is just a link with special parameters and... No, nothing else, that's it, just a link.
 Create an `<a>` element with proper href attribute and you are good to go.
@@ -67,7 +69,7 @@ href="http://www.linkedin.com/shareArticle?mini=true&url={ URL }&title={ Title }
 
 Of course, it should be used with `target="_blank"`, so don't forget about [security](https://mathiasbynens.github.io/rel-noopener/).
 
-### I smell big fat "but" waiting 'round the corner
+## I smell big fat "but" waiting 'round the corner
 
 If you prefer easier but less flexible and more data-hungry and time-wasting way over one requiring 
 a little work but granting full control of your site – yes, there is one "but". 

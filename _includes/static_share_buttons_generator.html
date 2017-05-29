@@ -1,0 +1,131 @@
+<style>
+    .static_share_buttons_generator .preview {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: stretch;
+        align-items: flex-start;
+    }
+
+    .static_share_buttons_generator .select label {
+        display: block;
+        float: left;
+        min-width: 10em;
+    }
+
+    .static_share_buttons_generator .result textarea {
+        font-size: 12px;
+    }
+</style>
+<div class="static_share_buttons_generator">
+    <div class="top clearfix">
+        <div class="form lg-col-10 md-col-9 sm-col-12 left">
+            <label for="share_text">Text to share:</label>
+            <input id="share_text" type="text" class="block field col-11" value="so link much wow" required/>
+            <label for="share_url">URL:</label>
+            <input id="share_url" type="text" class="block field col-11" value="{{ site.url }}{{ page.url }}" required/>
+            <label for="share_summary">Summary (for linkedin):</label>
+            <input id="share_summary" type="text" class="block field col-11" value="Some text everyone cares about"/>
+            <label for="share_class">Custom class for &lt;a&gt;:</label>
+            <input id="share_class" type="text" class="block field col-11" value="" placeholder="superclass1 superclass2"/>
+        </div>
+        <div class="select lg-col-2 md-col-3 sm-col-12 right mt2">
+            <label><input type="checkbox" name="facebook">facebook</label>
+            <label><input type="checkbox" name="linkedin">linkedin</label>
+            <label><input type="checkbox" name="twitter">twitter</label>
+            <label><input type="checkbox" name="vk">vk</label>
+            <label><input type="checkbox" name="telegram">telegram</label>
+            <label><input type="checkbox" name="pinterest">pinterest</label>
+            <label><input type="checkbox" name="skype">skype</label>
+            <label><input type="checkbox" name="google+">google+</label>
+            <label><input type="checkbox" name="tumblr">tumblr</label>
+        </div>
+    </div>
+
+    <h2>Preview</h2>
+    <div class="preview">
+    </div>
+    <h2>Code</h2>
+    <div class="result">
+        <textarea class="col-12" rows="8"></textarea>
+    </div>
+</div>
+
+<script defer>
+    (function () {
+        const selectBox = document.querySelector('.static_share_buttons_generator .select');
+        const resultBox = document.querySelector('.static_share_buttons_generator .result');
+        const previewBox = document.querySelector('.static_share_buttons_generator .preview');
+
+        const textShareInput = document.querySelector('#share_text');
+        const urlShareInput = document.querySelector('#share_url');
+        const summaryShareInput = document.querySelector('#share_summary');
+        const classShareInput = document.querySelector('#share_class');
+
+        const selectBoxState = {};
+
+        Array.from(selectBox.querySelectorAll("input")).map((input, idx) => {
+            selectBoxState[input.name] = {checked: input.checked, order: idx};
+        });
+        selectBox.addEventListener("click", clickHandler);
+        textShareInput.addEventListener("keyup", renderResult, false);
+        urlShareInput.addEventListener("keyup", renderResult, false);
+        summaryShareInput.addEventListener("keyup", renderResult, false);
+        classShareInput.addEventListener("keyup", renderResult, false);
+
+
+        function clickHandler(e) {
+            const target = e.target;
+            if (target.nodeName === "INPUT") {
+                selectBoxState[target.name].checked = target.checked;
+                renderResult()
+            }
+        }
+
+        function renderResult() {
+            const text = encodeURIComponent(textShareInput.value.trim());
+            const url = encodeURIComponent(urlShareInput.value.trim());
+            const summary = encodeURIComponent(summaryShareInput.value.trim());
+            previewBox.innerHTML = '';
+            Array.from(Object.keys(selectBoxState))
+                .filter(item => selectBoxState[item].checked)
+                .map(item => {
+                    const link = document.createElement("A");
+                    const linkText = document.createTextNode(item);
+                    const customClass = classShareInput.value.trim();
+                    link.href = getLink(item, text, url, summary);
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.appendChild(linkText);
+                    customClass && customClass.split(" ").map(className => link.classList.add(className));
+                    previewBox.appendChild(link);
+                });
+            resultBox.querySelector('textarea').value = previewBox.innerHTML;
+
+        }
+
+        function getLink(name, text, url, summary) {
+            switch (name) {
+                case 'facebook':
+                    return `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                case 'linkedin':
+                    return `http://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}&summary=${summary}`;
+                case 'twitter':
+                    return `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                case 'vk':
+                    return `https://vk.com/share.php?url=${url}`;
+                case 'telegram':
+                    return `https://telegram.me/share/url?text=${text}&url=${url}`;
+                case 'pinterest':
+                    return `https://pinterest.com/pin/create/button/?description=${text}&url=${url}`;
+                case 'skype':
+                    return `https://web.skype.com/share?url=${url}`;
+                case 'google+':
+                    return `https://plus.google.com/share?url=${url}`;
+                case 'tumblr':
+                    return `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${url}&title=${text}&caption=${summary}`;
+            }
+        }
+    })()
+</script>

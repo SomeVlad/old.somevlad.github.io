@@ -6,7 +6,7 @@ summary:    One more opinion on recent npmocalypse.
 permalink:  /npm-install-left-pad/
 ---
 
-### Prehistory
+## Prehistory
 
 Web-developer Azer Koçulu, the author of 
 [more than 250 node.js modules](https://gist.githubusercontent.com/azer/db27417ee84b5f34a6ea/raw/50ab7ef26dbde2d4ea52318a3590af78b2a21162/gistfile1.txt) 
@@ -52,7 +52,7 @@ In order to urgently remedy the situation, CTO and co-founder of NPM Laurie Voss
 «given the severity and widespread nature of breakage» decided to 
 [un-unpublish the module](https://twitter.com/seldo/status/712414588281552900).
 
-### Community's reaction
+## Community's reaction
 
 A big part of community decided that it is a perfect time to raise 
 [the problem of dependency hell](http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/) 
@@ -62,7 +62,7 @@ let’s do something about this!»
 
 Well, I guess, it’s not the correct angle this problem has to be observed from.
 
-### NPM is good
+## NPM is good
 
 First of all, npm is a great tool to save billions of hours for developers on planet Earth. 
 It’s a blessing that we have option not to reinvent the wheel for every single project. 
@@ -77,7 +77,7 @@ And suddenly you noticed a bug in it. You would have no option other than rewrit
 If it is an npm-module, you can just open an issue on its [GitHub page](https://github.com/juliangruber/isarray/issues). 
 That’s it.
 
-### NPM is bad
+## NPM is bad
 
 The most worrying me thing in all this discussion is wrong emphasis. 
 Rather than crying wolf at «dependency hell», we should really focus on npm’s behaviour in this situation.
