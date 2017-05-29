@@ -9,46 +9,93 @@
     }
 
     .static_share_buttons_generator .select label {
-        display: block;
-        float: left;
+        display: inline-block;
         min-width: 10em;
+        position: relative;
+        cursor: pointer;
+        padding-left: 30px;
+        margin-bottom: 10px;
+        /*float: left;*/
+        /*min-width: 10em;*/
     }
 
     .static_share_buttons_generator .result textarea {
         font-size: 12px;
     }
+
+    .static_share_buttons_generator .select input {
+        display: none;
+    }
+
+    .static_share_buttons_generator .select label:before {
+        content: '';
+        display: inline-block;
+        background: #0076df;
+        position: absolute;
+        left: 0;
+        top: 5px;
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+        border-radius: 80%;
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, .2);
+        box-sizing: border-box;
+        border: 10px solid #f6f6f6;
+        transition: border .3s ease;
+    }
+
+    .static_share_buttons_generator .select input:checked + label:before {
+        border-color: #fafafa;
+        border-width: 3px;
+    }
+
+    .static_share_buttons_generator .select input + label {
+        transition: color .7s ease;
+    }
+
+    .static_share_buttons_generator .select input:checked + label {
+        /*color: #5D5D5D;*/
+    }
+
 </style>
 <div class="static_share_buttons_generator">
     <div class="top clearfix">
         <div class="form lg-col-10 md-col-9 sm-col-12 left">
             <label for="share_text">Text to share:</label>
-            <input id="share_text" type="text" class="block field col-11" value="so link much wow" required/>
+            <input id="share_text" type="text" class="block field col-11" value=""
+                   placeholder="so link much wow"/>
+
             <label for="share_url">URL:</label>
-            <input id="share_url" type="text" class="block field col-11" value="{{ site.url }}{{ page.url }}" required/>
+            <input id="share_url" type="text" class="block field col-11" value=""
+                   placeholder="{{ site.url }}{{ page.url }}"/>
+
             <label for="share_summary">Summary (for linkedin):</label>
-            <input id="share_summary" type="text" class="block field col-11" value="Some text everyone cares about"/>
+            <input id="share_summary" type="text" class="block field col-11" value=""
+                   placeholder="Some words everyone cares about"/>
+
             <label for="share_class">Custom class for &lt;a&gt;:</label>
-            <input id="share_class" type="text" class="block field col-11" value="" placeholder="superclass1 superclass2"/>
+            <input id="share_class" type="text" class="block field col-11" value=""
+                   placeholder="superclass1 superclass2"/>
         </div>
         <div class="select lg-col-2 md-col-3 sm-col-12 right mt2">
-            <label><input type="checkbox" name="facebook">facebook</label>
-            <label><input type="checkbox" name="linkedin">linkedin</label>
-            <label><input type="checkbox" name="twitter">twitter</label>
-            <label><input type="checkbox" name="vk">vk</label>
-            <label><input type="checkbox" name="telegram">telegram</label>
-            <label><input type="checkbox" name="pinterest">pinterest</label>
-            <label><input type="checkbox" name="skype">skype</label>
-            <label><input type="checkbox" name="google+">google+</label>
-            <label><input type="checkbox" name="tumblr">tumblr</label>
+            <input type="checkbox" name="facebook" id="facebook"><label for="facebook">facebook</label>
+            <input type="checkbox" name="linkedin" id="linkedin"><label for="linkedin">linkedin</label>
+            <input type="checkbox" name="twitter" id="twitter"><label for="twitter">twitter</label>
+            <input type="checkbox" name="vk" id="vk"><label for="vk">vk</label>
+            <input type="checkbox" name="telegram" id="telegram"><label for="telegram">telegram</label>
+            <input type="checkbox" name="pinterest" id="pinterest"><label for="pinterest">pinterest</label>
+            <input type="checkbox" name="skype" id="skype"><label for="skype">skype</label>
+            <input type="checkbox" name="google+" id="google+"><label for="google+">google+</label>
+            <input type="checkbox" name="tumblr" id="tumblr"><label for="tumblr">tumblr</label>
         </div>
     </div>
 
     <h2>Preview</h2>
     <div class="preview">
     </div>
-    <h2>Code</h2>
+    <h2><label for="result">Code</label></h2>
     <div class="result">
-        <textarea class="col-12" rows="8"></textarea>
+        <textarea id="result" class="col-12 block field" rows="8"></textarea>
     </div>
 </div>
 
