@@ -8,7 +8,7 @@ url:         "https://vladsamoylov.ru"
 date_format: "%-d %b, %Y"
 
 # Google services
-google_verification:
+google_verification: Ms6urkVt3RUsYExuXIpYIuGYT-iu890cmiz-WFoSNr4
 # Use either direct GA implementation or set up GTM account
 # - using both will skew your data (leave blank to not use at all)
 google_analytics: UA-46523265-2
