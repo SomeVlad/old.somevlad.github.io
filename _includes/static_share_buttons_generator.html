@@ -22,7 +22,8 @@
     }
 
     .static_share_buttons_generator .result textarea {
-        font-size: 12px;
+        font-size: 0.5em;
+        resize: vertical;
     }
 
     .static_share_buttons_generator .select input {
@@ -56,6 +57,17 @@
 
     .static_share_buttons_generator .select input:checked + label {
         /*color: #5D5D5D;*/
+    }
+
+    .static_share_buttons_generator .copy_result_to_clipboard {
+        margin-top: -0.5rem;
+        width: 10em;
+    }
+
+    .static_share_buttons_generator .copy_result_to_clipboard:hover,
+    .static_share_buttons_generator .copy_result_to_clipboard:focus,
+    .static_share_buttons_generator .copy_result_to_clipboard:active {
+        color: inherit;
     }
 
 </style>
@@ -97,6 +109,7 @@
     <h2><label for="result">Code</label></h2>
     <div class="result">
         <textarea id="result" class="col-12 block field" rows="8"></textarea>
+        <button class="copy_result_to_clipboard button bg-lighter-gray right">Copy to clipboard</button>
     </div>
 </div>
 
@@ -105,6 +118,9 @@
         const selectBox = document.querySelector('.static_share_buttons_generator .select');
         const resultBox = document.querySelector('.static_share_buttons_generator .result');
         const previewBox = document.querySelector('.static_share_buttons_generator .preview');
+
+        const copyToClipboardButton = document.querySelector('.copy_result_to_clipboard');
+        const resultCode = resultBox.querySelector('textarea');
 
         const textShareInput = document.querySelector('#share_text');
         const urlShareInput = document.querySelector('#share_url');
@@ -121,7 +137,11 @@
         urlShareInput.addEventListener("keyup", renderResult, false);
         summaryShareInput.addEventListener("keyup", renderResult, false);
         classShareInput.addEventListener("keyup", renderResult, false);
-
+        resultCode.addEventListener("change", resetCopyButton, false);
+        resultCode.addEventListener("keyup", resetCopyButton, false);
+        copyToClipboardButton.addEventListener("click", function () {
+            copyToClipboard(copyToClipboardButton, resultCode);
+        }, false);
 
         function clickHandler(e) {
             const target = e.target;
@@ -149,8 +169,7 @@
                     customClass && customClass.split(" ").map(className => link.classList.add(className));
                     previewBox.appendChild(link);
                 });
-            resultBox.querySelector('textarea').value = previewBox.innerHTML;
-
+            resultCode.value = previewBox.innerHTML;
         }
 
         function getLink(name, text, url, summary) {
@@ -175,5 +194,37 @@
                     return `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${url}&title=${text}&caption=${summary}`;
             }
         }
-    })()
+
+        function copyToClipboard(buttonElem, targetElem) {
+            if (document.queryCommandSupported('copy')) {
+                clearSelection();
+                const range = document.createRange();
+                range.selectNode(targetElem);
+                window.getSelection().addRange(range);
+
+                try {
+                    const successful = document.execCommand('copy');
+                    const msg = successful ? 'Copied' : 'Oops, error!';
+                    buttonElem.innerHTML = msg;
+                } catch (err) {}
+                clearSelection();
+            }
+            else {
+                buttonElem.classList.add('hide');
+            }
+
+            function clearSelection() {
+                if (document.selection) {
+                    document.selection.empty();
+                } else if (window.getSelection) {
+                    window.getSelection().removeAllRanges();
+                }
+            }
+        }
+
+        function resetCopyButton() {
+            copyToClipboardButton.innerHTML = 'Copy to clipboard'
+        }
+    })
+    ()
 </script>
