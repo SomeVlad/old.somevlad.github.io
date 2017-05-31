@@ -129,6 +129,10 @@
     .facebook_link_fixer .is-error ~ .err {
         display: block;
     }
+
+    .facebook_link_fixer .insert_sample {
+        cursor: pointer;
+    }
 </style>
 <div class="facebook_link_fixer">
     <p>
@@ -136,7 +140,7 @@
         <input id="shitty_link" type="text" class="block field col-12" value=""
                placeholder="https://m.faceb💩k.com/weneedwebdev"/>
         <span class="err col-12 hide">Your link is not shitty enough! 
-            Try <a onclick="document.querySelector('#shitty_link').value = 'https://m.facebook.com/story.php?story_fbid=10154622836903553&id=19292868552'">sample shit</a>.</span>
+            Try <a class="insert_sample">sample shit</a>.</span>
     </p>
 
     <p>Then click this button:
@@ -158,6 +162,11 @@
         const goodInput = document.querySelector('#good_link');
         const copyToClipboardButton = document.querySelector('.copy_result_to_clipboard');
         const goToGoodLink = document.querySelector('a.go');
+        const insertSample = document.querySelector('.insert_sample');
+
+        insertSample.addEventListener('click', function (e) {
+            badInput.value = 'https://m.facebook.com/story.php?story_fbid=10154622836903553&id=19292868552';
+        })
         button.addEventListener('click', generateLink);
         copyToClipboardButton.addEventListener('click', function () {
             copyToClipboard(copyToClipboardButton, goodInput);
@@ -188,9 +197,16 @@
         function copyToClipboard(buttonElem, targetElem) {
             if (document.queryCommandSupported('copy')) {
                 clearSelection();
-                const range = document.createRange();
-                range.selectNode(targetElem);
-                window.getSelection().addRange(range);
+
+                if (targetElem.nodeName === 'INPUT') {
+                    targetElem.select();
+                }
+
+                else {
+                    const range = document.createRange();
+                    range.selectNode(targetElem);
+                    window.getSelection().addRange(range);
+                }
 
                 try {
                     const successful = document.execCommand('copy');
