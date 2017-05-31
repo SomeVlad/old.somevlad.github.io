@@ -2,11 +2,11 @@
     .facebook_link_fixer {
         margin-bottom: 1.5em;
     }
+
     .facebook_link_fixer .unshit {
         display: block;
         margin-top: 0.5em;
-        margin-left: -2rem;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
         text-decoration: none;
         text-transform: uppercase;
         font-weight: 300;
@@ -131,23 +131,23 @@
     }
 </style>
 <div class="facebook_link_fixer">
-    <ul>
-        <li>
-            <label for="shitty_link">First paste your shitty mobile link here:</label>
-            <input id="shitty_link" type="text" class="block field col-12" value=""
-                   placeholder="https://m.faceb💩k.com/weneedwebdev"/>
-            <span class="err col-12 hide">Your link is not shitty enough!</span>
-        </li>
-        <li>
-            Then click this button:
-            <button class="unshit button bg-white col-6 sm-col-12">Unshit!</button>
-        </li>
-        <li class="hide">And here you go!</li>
-    </ul>
-    <input id="good_link" type="text" class="block field col-12 mb0 hide" value=""
-           placeholder="tadaa"/>
-    <a class="go button button-blue col-6 hide" href="" target="_blank" rel="noopener noreferrer">Navigate me there!</a>
-    <button class="copy_result_to_clipboard button bg-lighter-gray col-6 right hide">Copy!</button>
+    <p>
+        First paste your shitty mobile link here:
+        <input id="shitty_link" type="text" class="block field col-12" value=""
+               placeholder="https://m.faceb💩k.com/weneedwebdev"/>
+        <span class="err col-12 hide">Your link is not shitty enough!</span>
+    </p>
+
+    <p>Then click this button:
+        <button class="unshit button bg-white col-6 sm-col-12">Unshit!</button>
+    </p>
+    <p class="hide">And here you go!
+        <input id="good_link" type="text" class="block field col-12 mb0 hide" value=""
+               placeholder="tadaa"/>
+        <a class="go button button-blue col-6 hide" href="" target="_blank" rel="noopener noreferrer">Navigate me
+            there!</a>
+        <button class="copy_result_to_clipboard button bg-lighter-gray col-6 right hide">Copy!</button>
+    </p>
 </div>
 
 <script defer>
