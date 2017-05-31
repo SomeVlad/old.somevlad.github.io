@@ -177,13 +177,22 @@
             badInput.classList.remove('is-error');
             try {
                 const badLink = new URL(badInput.value);
-                const postId = badLink.searchParams.get('story_fbid');
-                const userId = badLink.searchParams.get('id');
 
-                if (!postId || !userId || badInput.value.indexOf('m.') < 0) {
-                    throw new Error('Your link is not shitty enough!');
+                if (badLink.pathname.indexOf('/posts/') !== -1) {
+                    goodLink = badLink.href.replace('m.', 'www.');
                 }
-                goodLink = `https://www.facebook.com/${userId}/posts/${postId}`;
+
+                else {
+                    const postId = badLink.searchParams.get('story_fbid');
+                    const userId = badLink.searchParams.get('id');
+
+                    if (!postId || !userId || badInput.value.indexOf('m.') < 0) {
+                        throw new Error('Your link is not shitty enough!');
+                    }
+
+                    goodLink = `https://www.facebook.com/${userId}/posts/${postId}`;
+                }
+
                 goodInput.value = goodLink;
                 goToGoodLink.href = goodLink;
                 document.querySelectorAll('.hide').forEach((hidden) => hidden.classList.remove('hide'));
