@@ -1,7 +1,8 @@
-const CACHE_NAME = 'vladsamoylov-cache-v1';
+const CACHE_NAME = 'vladsamoylov-cache-v2';
 const urlsToCache = [
     '/',
-    '/css/style.css'
+    '/css/style.css',
+    '/about/'
 ];
 
 self.addEventListener('install', function (event) {
