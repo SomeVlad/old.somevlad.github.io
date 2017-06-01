@@ -1,0 +1,15 @@
+{
+  "short_name": "VS",
+  "name": "Vlad Samoylov's blog",
+  "icons": [
+    {
+      "src": "/images/favicon/android-chrome-96x96.png?v=gAE6dwK79J",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#333333",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "index.html?launcher=true"
+}
