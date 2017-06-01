@@ -31,11 +31,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {
               navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                  // Registration was successful
-                  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                  // ServiceWorker registration successful with registration.scope
               }, function(err) {
-                  // registration failed :(
-                  console.log('ServiceWorker registration failed: ', err);
+                  // ServiceWorker registration failed with err
               });
           });
       }
