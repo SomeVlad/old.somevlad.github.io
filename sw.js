@@ -1,10 +1,3 @@
-const CACHE_NAME = 'vladsamoylov-cache-v3';
-const urlsToCache = [
-    '/',
-    '/css/style.css',
-    '/about/'
-];
-
 // While overkill for this specific sample in which there is only one cache,
 // this is one best practice that can be followed in general to keep track of
 // multiple caches used by a given service worker, and keep them all versioned.
