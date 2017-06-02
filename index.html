@@ -8,7 +8,16 @@ layout: default
     <div class="posts">
       {% for post in paginator.posts %}
         <div class="post py3">
-          <p class="post-meta">{{ post.date | date: site.date_format }}</p>
+          <p class="post-meta">
+            {% capture currentYear %}{{ 'now' | date: "%Y" }}{% endcapture %}
+            {% capture postYear %}{{ post.date | date: "%Y" }}{% endcapture %}
+
+            {% if currentYear == postYear %}
+                {{ post.date | date: site.date_format_short }}
+            {% else %}
+                {{ post.date | date: site.date_format }}
+            {% endif %}
+          </p>
           <link rel="prefetch" href="{{ post.url | prepend: site.baseurl }}">
           <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
           <span class="post-summary">

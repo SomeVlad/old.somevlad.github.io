@@ -6,6 +6,7 @@ description: "Frontend developer Vlad Samoylov's blog"
 baseurl:     ""
 url:         "https://vladsamoylov.ru"
 date_format: "%-d %b, %Y"
+date_format_short: "%-d %b"
 
 # Google services
 google_verification: Ms6urkVt3RUsYExuXIpYIuGYT-iu890cmiz-WFoSNr4

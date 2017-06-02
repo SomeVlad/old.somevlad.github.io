@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 {% include head.html %}
 <body class="site{% if site.animated %} animated fade-in-down{% endif %}">
   {% if site.google_tag_manager %}
@@ -27,16 +27,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <!-- register service worker -->
-  <script>
-      if ('serviceWorker' in navigator) {
-          window.addEventListener('load', function() {
-              navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                  // ServiceWorker registration successful with registration.scope
-              }, function(err) {
-                  // ServiceWorker registration failed with err
+  <script defer>
+      (function() {
+          if ('serviceWorker' in navigator && location.href.indexOf('localhost') === -1) {
+              window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                      // ServiceWorker registration successful with registration.scope
+                  }, function(err) {
+                      // ServiceWorker registration failed with err
+                  });
               });
-          });
-      }
+          }
+      })();
   </script>
 </body>
 </html>
