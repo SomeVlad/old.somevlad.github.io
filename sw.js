@@ -22,7 +22,10 @@ self.addEventListener('install', function(event) {
     var urlsToPrefetch = [
         '/',
         '/css/style.css',
-        '/about/'
+        '/about/',
+        'https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic',
+        'https://fonts.googleapis.com/css?family=Lato:900,300'
+
     ];
 
     // All of these logging statements should be visible via the "Inspect" interface
