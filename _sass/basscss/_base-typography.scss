@@ -33,14 +33,14 @@ ul {
   padding-left: $space-3;
 }
 
-pre,
-code,
+.pre,
+.code,
 samp {
   font-family: $monospace-font-family;
   font-size: inherit;
 }
 
-pre {
+.pre {
   margin-top: 0;
   margin-bottom: $space-2;
   overflow-x: scroll;
