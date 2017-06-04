@@ -23,14 +23,7 @@ layout: default
 </div>
 
 <article class="post-content">
-
-  {{ content
-    | replace: 'pre class="highlight"', 'div class="highlight pre"'
-    | replace: "/pre", "/div"
-    | replace: "/code", "/span"
-    | replace: "code", "span class='code'"
-  }}
-
+  {{ content }}
 </article>
 
 {% if site.show_sharing_icons %}

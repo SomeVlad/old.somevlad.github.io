@@ -1,19 +1,19 @@
-.pre,
-.pre .code {
+pre,
+pre code {
   background-color: transparent;
   border-radius: $pre-border-radius;
 }
 
-.pre,
-.code {
+pre,
+code {
   font-family: $monospace-font-family;
 }
 
-.code {
+code {
   color: #7a7a7a;
 }
 
-.pre {
+pre {
   padding: 1.125em;
   line-height: 1.11;
   overflow-x: scroll;
@@ -26,7 +26,7 @@
   line-height: 1;
 }
 
-.pre {
+pre {
     counter-reset: line-numbering;
     white-space: pre;
     overflow-x: auto;
@@ -34,11 +34,11 @@
     word-wrap: inherit;
 }
 
-.pre a {
+pre a {
     background-image: none;
 }
 
-.pre a::before {
+pre a::before {
   content: counter(line-numbering);
   counter-increment: line-numbering;
   padding-right: 1em; /* space after numbers */
@@ -57,14 +57,14 @@
   user-select: none;
 }
 
-.pre a:first-of-type::before {
+pre a:first-of-type::before {
   padding-top: 10px;
 }
 
-.pre a:last-of-type::before {
+pre a:last-of-type::before {
   padding-bottom: 10px;
 }
 
-.pre a:only-of-type::before {
+pre a:only-of-type::before {
   padding: 10px;
 }
