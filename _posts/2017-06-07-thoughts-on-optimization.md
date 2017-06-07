@@ -41,7 +41,7 @@ If you think you are, proceed to the next step:
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 1.5em; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/PhUb7y9WZGs' frameborder='0' allowfullscreen></iframe></div>
 
-If you strategy remains unrethought 
+If your strategy remains unrethought 
 
 ### 3) ensure you've done all the more obvious optimization stuff
 
@@ -57,5 +57,7 @@ Well...
 [![I give up](/images/well.gif "I give up")](https://medium.com/new-story){:target="_blank" rel="noopener noreferrer"}
 
 I have to end this topic somewhat pathetically.
+
+----------
 
 Dixi.
