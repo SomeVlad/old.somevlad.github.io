@@ -1,0 +1,130 @@
+<style>
+    .optimization_checklist .select label {
+        display: inline-block;
+        min-width: 8em;
+        position: relative;
+        cursor: pointer;
+        padding-left: 1.8em;
+        margin-top: 0.8em;
+    }
+    /*.optimization_checklist .select label:first-of-type {
+        margin-top: 1.2em;
+    }*/
+
+    .optimization_checklist .result textarea {
+        font-size: 0.5em;
+        resize: vertical;
+    }
+
+    .optimization_checklist .select input {
+        display: none;
+    }
+
+    .optimization_checklist .select label:before {
+        content: '';
+        display: inline-block;
+        background: #0076df;
+        position: absolute;
+        left: 0;
+        top: 0.2em;
+        height: 1em;
+        width: 1em;
+        border-radius: 80%;
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, .2);
+        box-sizing: border-box;
+        border: 0.5em solid #f6f6f6;
+        transition: border .3s ease;
+    }
+
+    .optimization_checklist .select input:checked+label:before {
+        border-color: #fafafa;
+        border-width: 3px;
+    }
+
+    .optimization_checklist .select input+label {
+        transition: color .3s ease;
+    }
+
+    .optimization_checklist .select input:checked+label {
+        color: #8f8f8f;
+        text-decoration: line-through;
+    }
+
+    .optimization_checklist .select p {
+        font-size: 0.8em;
+    }
+</style>
+
+
+<div class="optimization_checklist">
+    <div class="select">
+        <input type="checkbox" id="1">
+        <label for="1">Tree-shake</label>
+        <p>Your users don't have to load all the stuff even you don't use.</p>
+
+        <input type="checkbox" id="2">
+        <label for="2">Minify your assets</label>
+        <p>Sometimes it changes bundle size drastically.</p>
+
+        <input type="checkbox" id="3">
+        <label for="3"><code>defer</code></label>
+        <p>And <code>async</code></p>
+
+        <input type="checkbox" id="4">
+        <label for="4">Stop using SDK's for social buttons</label>
+        <p><a target="_blank" rel="noopener noreferrer" href="{{ site.baseurl }}{% post_url 2017-05-29-social-buttons-generator %}">Use static ones instead.</a></p>
+
+        <input type="checkbox" id="5">
+        <label for="5">Use <code>&lt;picture&gt;</code> and <code>&lt;img srcset&gt;</code></label>
+        <p>It's quite <a href="http://www.responsivebreakpoints.com/" target="_blank" rel="noopener noreferrer">simple</a>.</p>
+
+        <input type="checkbox" id="6">
+        <label for="6">Use progressive jpeg, optimize png and svg</label>
+        <p>
+            <a href="https://github.com/mozilla/mozjpeg" target="_blank" rel="noopener noreferrer">Mozilla JPEG Encoder</a>,
+            <a target="_blank" rel="noopener noreferrer" href="https://tinypng.com/">TinyPNG</a> for png and jpeg compression,
+            <a target="_blank" rel="noopener noreferrer" href="https://kornel.ski/lossygif">LossyGIF</a>,
+            <a target="_blank" rel="noopener noreferrer" href="https://jakearchibald.github.io/svgomg/">SVGOMG</a> powered
+            by
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/svg/svgo">SVGO</a>.
+        </p>
+
+        <input type="checkbox" id="7">
+        <label for="7">Optimize webfonts</label>
+        <p>
+            <a target="_blank" rel="noopener noreferrer" href="https://pixelambacht.nl/2016/font-awesome-fixed/">Like this</a>,
+            for example. Or just use system ones, that's actually an option.
+        </p>
+
+
+        <input type="checkbox" id="8">
+        <label for="8">Inline critical CSS</label>
+        <p>E.g. with this <a target="_blank" rel="noopener noreferrer" href="https://github.com/filamentgroup/criticalCSS">tool</a>.</p>
+
+        <input type="checkbox" id="9">
+        <label for="9">Tell a browser what he will do next most likely</label>
+        <p>
+            Use
+            <a target="_blank" rel="noopener noreferrer" href="https://w3c.github.io/resource-hints/#dfn-prefetch"><code>prefetch</code></a>,
+            <a target="_blank" rel="noopener noreferrer" href="https://w3c.github.io/resource-hints/#dfn-dns-prefetch"><code>dns-prefetch</code></a>,
+            <a target="_blank" rel="noopener noreferrer" href="https://w3c.github.io/resource-hints/#dfn-prerender"><code>prerender</code></a>,
+            <a target="_blank" rel="noopener noreferrer" href="https://w3c.github.io/preload/"><code>preload</code></a> and
+            <a target="_blank" rel="noopener noreferrer" href="https://w3c.github.io/resource-hints/#dfn-preconnext"><code>preconnect</code></a>.
+        </p>
+
+        <input type="checkbox" id="10">
+        <label for="10">Check if you are using compression</label>
+        <p>
+            <a target="_blank" rel="noopener noreferrer" href="https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/">HPACK</a>            and
+            <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Gzip">Gzip</a>.
+        </p>
+
+        <input type="checkbox" id="11">
+        <label for="11">Implement service workers</label>
+        <p>So your site is at least half as fast as mine.</p>
+
+        <input type="checkbox" id="12">
+        <label for="12">Take advice from Google</label>
+        <p>Use <a target="_blank" rel="noopener noreferrer" href="https://github.com/GoogleChrome/lighthouse">this tool</a> and follow its recommendations</p>
+    </div>
+</div>
