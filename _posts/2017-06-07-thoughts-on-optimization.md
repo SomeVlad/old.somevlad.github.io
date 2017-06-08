@@ -37,7 +37,7 @@ So when you come up with yet another brilliant idea on how to cheat the compiler
 
 If you think you are, proceed to the next step:
 
-### 2) just watch this video
+### 2) watch this video
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 1.5em; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/PhUb7y9WZGs' frameborder='0' allowfullscreen></iframe></div>
 
@@ -56,7 +56,7 @@ Well...
 
 [![I give up](/images/well.gif "I give up")](https://medium.com/new-story){:target="_blank" rel="noopener noreferrer"}
 
-I have to end this topic somewhat pathetically.
+I have to end this topic somewhat arrogantly.
 
 ----------
 
