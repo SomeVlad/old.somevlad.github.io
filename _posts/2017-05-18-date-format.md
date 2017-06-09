@@ -5,7 +5,6 @@ date:       2017-05-18 18:00:00
 summary:    In case you are curious
 description: In case you are curious
 permalink:  /date-format/
-no_instant: true
 og_image:   date-format.png
 ---
 

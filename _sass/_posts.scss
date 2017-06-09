@@ -46,3 +46,18 @@
 .related-post-title {
   border-bottom: thin solid #f3f3f3;
 }
+
+.tags {
+  position: relative;
+  padding-left: 1.5em;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 1em;
+    height: 100%;
+    background: url(/images/tags.svg) 0 0.35em no-repeat;
+    background-size: contain;
+    display: inline-block;
+  }
+}

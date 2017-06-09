@@ -26,6 +26,15 @@ layout: default
   {{ content }}
 </article>
 
+{% if page.tags.size > 0 %}
+  <div class="tags">
+    {% for tag in page.tags %}
+      {% capture tag_name %}{{ tag }}{% endcapture %}
+      <a href="/tag/{{ tag_name }}">{{ tag_name }}</a>{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
 {% if site.show_sharing_icons %}
   {% include share_buttons.html %}
 {% endif %}

@@ -5,6 +5,7 @@ date:       2017-05-29 12:00:00
 summary:    A tool to generate social share links online
 permalink:  /social-buttons-generator/
 og_image:   social-buttons-generator.png
+tags:       optimization DIY
 ---
 
 ## Why should I use it? 

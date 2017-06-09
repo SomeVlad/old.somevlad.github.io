@@ -4,6 +4,7 @@ title:      Set, Map, WeakSet and WeakMap
 date:       2016-12-23 18:00:00
 summary:    New collection types appeared in ES-2015.
 permalink:  /set-map-weakset-and-weakmap/
+tags:       js es2015
 ---
 
 ### Map

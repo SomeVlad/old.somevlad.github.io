@@ -4,6 +4,7 @@ title:      npm install left-pad
 date:       2017-02-15 18:00:00
 summary:    One more opinion on recent npmocalypse.
 permalink:  /npm-install-left-pad/
+tags:       npm frontend
 ---
 
 ## Prehistory

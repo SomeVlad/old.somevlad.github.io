@@ -4,6 +4,7 @@ title:      A few thoughts on frontend optimization
 date:       2017-06-07 12:00:00
 summary:    There are a lot of things you can do in order to optimize client-side. But sometimes it goes wrong.
 permalink:  /optimizing-frontend/
+tags:       frontend optimization 
 ---
 
 ## Why did you write this? 

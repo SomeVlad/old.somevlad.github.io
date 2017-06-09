@@ -5,6 +5,7 @@ date:       2017-05-31 12:00:00
 summary:    A tool to fix facebook shittiness
 permalink:  /facebook-link-fixer/
 og_image:   facebook-link-fixer.png
+tags:       facebook DIY 
 ---
 ## Preamble 
 As we all know, Facebook cannot afford a couple of developers. Sometimes it is funny. 

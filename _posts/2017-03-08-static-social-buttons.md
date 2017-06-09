@@ -5,6 +5,7 @@ date:       2017-03-08 18:00:00
 summary:    If you want to let your users share your site and don't want to load a bunch of useless SDKs, there is a way.
 permalink:  /static-social-buttons/
 og_image:   static-social-buttons.png
+tags:       frontend optimization
 ---
 *edit:*
 I made a [generator]({{ site.baseurl }}{% post_url 2017-05-29-social-buttons-generator %}) for you to use.

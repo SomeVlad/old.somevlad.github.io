@@ -9,6 +9,9 @@
       {% if site.show_social_icons %}
         {% include social_links.html %}
       {% endif %}
+      {% if site.tags != "" %}
+        {% include collect_tags.html %}
+      {% endif %}
     </div>
   </div>
 </header>
