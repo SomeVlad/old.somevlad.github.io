@@ -11,7 +11,7 @@
 // cache, then increment the CACHE_VERSION value. It will kick off the service worker update
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
-var CACHE_VERSION = 3;
+var CACHE_VERSION = 4;
 var CURRENT_CACHES = {
     prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
@@ -24,13 +24,12 @@ self.addEventListener('install', function(event) {
         '/css/style.css',
         '/about/',
         'https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic',
-        'https://fonts.googleapis.com/css?family=Lato:900,300'
-
+        'https://fonts.googleapis.com/css?family=Lato:900,300',
+        '/images/tags.svg'
     ];
 
     // All of these logging statements should be visible via the "Inspect" interface
     // for the relevant SW accessed via chrome://serviceworker-internals
-    console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
 
     event.waitUntil(
         caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
@@ -71,7 +70,6 @@ self.addEventListener('install', function(event) {
             });
 
             return Promise.all(cachePromises).then(function() {
-                console.log('Pre-fetching complete.');
             });
         }).catch(function(error) {
             console.error('Pre-fetching failed:', error);
@@ -103,25 +101,17 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-    console.log('Handling fetch event for', event.request.url);
-
     event.respondWith(
         // caches.match() will look for a cache entry in all of the caches available to the service worker.
         // It's an alternative to first opening a specific named cache and then matching on that.
         caches.match(event.request).then(function(response) {
             if (response) {
-                console.log('Found response in cache:', response);
-
                 return response;
             }
-
-            console.log('No response found in cache. About to fetch from network...');
 
             // event.request will always have the proper mode set ('cors, 'no-cors', etc.) so we don't
             // have to hardcode 'no-cors' like we do when fetch()ing in the install handler.
             return fetch(event.request).then(function(response) {
-                console.log('Response from network is:', response);
-
                 return response;
             }).catch(function(error) {
                 // This catch() will handle exceptions thrown from the fetch() operation.

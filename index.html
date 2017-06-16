@@ -4,10 +4,25 @@ layout: default
 {% assign posts_count = (paginator.posts | size) %}
 
 <div class="home">
+
+  {% comment %}
+    not useful yet:
+    <input type="radio" name="language" value="en" id="lang_en" style="display: none;">
+    <input type="radio" name="language" value="ru" id="lang_ru" style="display: none;">
+    <input type="radio" name="language" value="all" id="lang_all" style="display: none;">
+    <div class="lang-switch">
+      <ul>
+        <li><label for="lang_ru">🇷🇺</label></li>
+        <li><label for="lang_en">🇬🇧</label></li>
+        <li><label for="lang_all">¯\_(ツ)_/¯</label></li>
+      </ul>
+    </div>
+  {% endcomment %}
+
   {% if posts_count > 0 %}
     <div class="posts">
       {% for post in paginator.posts %}
-        <div class="post py3">
+        <div class="post py3 {% comment %} not useful yet: {{ post.lang | default: 'en' }} {% endcomment %}">
           <p class="post-meta">
             {% capture currentYear %}{{ 'now' | date: "%Y" }}{% endcapture %}
             {% capture postYear %}{{ post.date | date: "%Y" }}{% endcapture %}
