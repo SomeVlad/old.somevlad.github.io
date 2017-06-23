@@ -4,7 +4,7 @@ email:             samoylov.dev@gmail.com
 author:            Vlad Samoylov
 description:       "Frontend developer Vlad Samoylov's blog"
 baseurl:           ""
-url:               "https://vladsamoylov.ru"
+url:               "https://frontenderwho.rocks"
 date_format:       "%-d %b, %Y"
 date_format_short: "%-d %b"
 
