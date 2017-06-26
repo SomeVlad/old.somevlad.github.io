@@ -27,7 +27,7 @@ const stage = new Container(),
         transparent: false,
         resolution: 1
     });
-document.getElementById('canvas').appendChild(renderer.view);
+document.body.appendChild(renderer.view);
 
 const asteroid1JsonPath = "/images/404/asteroid-1/asteroid-1.json";
 const spaceshipPath = "/images/404/spaceship.png";
@@ -171,12 +171,7 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 
     state();
-
-    // let rocks fall from the sky!
-    //Update the cat's velocity
-    // SPACESHIP.vx = 2;
-    // SPACESHIP.vy = 0.1;
-
+    
     //Apply the velocity values to the cat's 
     //position to make it move
     SPACESHIP.x += SPACESHIP.vx;
