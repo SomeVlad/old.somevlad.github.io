@@ -2,7 +2,7 @@
 layout:     post
 title:      Facebook link fixer
 date:       2017-05-31 12:00:00
-summary:    A tool to fix facebook shittiness
+summary:    A tool to fix facebook shittiness.
 permalink:  /facebook-link-fixer/
 og_image:   facebook-link-fixer.png
 tags:       facebook DIY 
