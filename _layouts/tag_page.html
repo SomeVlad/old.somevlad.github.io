@@ -6,82 +6,25 @@ layout: default
   <h1>Tag: {{ page.tag }}</h1>
   {% if page.tag == "in-a-nutshell" %}
   <h2>What is it?</h2>
-  <div class="description" style="position: relative; margin-bottom: 2em;">
-
+  <div class="description" style="position: relative; margin-bottom: 1em;">
       It happens sometimes: you see something cool, you try to google it, you find yourself stuck on a giant longread, and by the
       time you make it through the text, all your curiosity is gone.<br><br>
       In order to avoid this information overload I started <em>In a nutshell</em> – a new series of posts, where I basically try to
       make <strong>a summary</strong> of the information on something given by first couple of google search results page. 
       Just enough to get started without digging too deep.
-
   </div>
-  
-  <!--<style>
-    .post p {
-      animation: fade 5s linear forwards;
+  <style>
+    .description {
+      animation: fade 5s 2s linear forwards;
     }
-    .post p strong {
-      /*animation: enlarge 5s linear forwards;*/
+    .description strong {
       color: #333333;
-      font-size: 1rem;
     }
     @keyframes fade {
-      from {color: #333333; font-size: 1rem;}
-      to {color: #ffffff; font-size: 0rem;}
+      from {color: #333333;}
+      to {color: #cccccc;}
     }
-    @keyframes enlarge {
-      from {font-size: 1rem;}
-      to {font-size: 2rem;}
-    }
-  </style>-->
-  <script>
-    let parent = document.querySelector('.description');
-    let natural_point = parent.querySelector("strong");
-    let artificial_point = document.createElement("STRONG");
-    artificial_point.appendChild(document.createTextNode(natural_point.innerHTML));
-  
-    artificial_point.style.position = 'absolute';
-    artificial_point.style.color = '#333333';
-    artificial_point.style.left = natural_point.offsetLeft + 'px';
-    artificial_point.style.top = natural_point.offsetTop + 'px';
-    artificial_point.style.lineHeight = 1.2;
-
-    natural_point.style.opacity = 0;
-    parent.appendChild(artificial_point);
-
-    let remain_options = {
-      iterations: 1,
-      iterationStart: 0,
-      delay: 4000,
-      endDelay: 0,
-      duration: 5000,
-      fill: 'forwards',
-      easing: 'ease-in-out',
-    };
-
-    let fade_options = {
-      iterations: 1,
-      iterationStart: 0,
-      delay: 2000,
-      endDelay: 0,
-      duration: 7000,
-      fill: 'forwards',
-      easing: 'linear',
-    }
-
-    let remain = [
-      { left: artificial_point.style.left, top: artificial_point.style.top, color: "#333333", fontSize: '1rem' },
-      { left: 0, top: '1em', color: "#333333", fontSize: '1.2rem' }
-    ];
-
-    let fade = [
-      { color: "#333333" },
-      { color: 'transparent' }
-    ]
-
-    artificial_point.animate(remain, remain_options);
-    parent.animate(fade, fade_options)
-  </script>
+  </style>
   {% endif %}
   <ul>
     {% for post in site.tags[page.tag] %}

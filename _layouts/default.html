@@ -33,11 +33,15 @@
   <!-- register service worker -->
   <script defer>
     (function () {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        for (let registration of registrations) {
-          registration.unregister()
-        }
-      })
+      if ('serviceWorker' in navigator && location.href.indexOf('localhost') === -1) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').then(function (registration) {
+            // ServiceWorker registration successful with registration.scope
+          }, function (err) {
+            // ServiceWorker registration failed with err
+          });
+        });
+      }
     })();
   </script>
 </body>
