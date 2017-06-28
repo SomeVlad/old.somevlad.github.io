@@ -181,14 +181,14 @@
                 const badLink = new URL(badInput.value);
 
                 if (badLink.pathname.indexOf('/posts/') !== -1) {
-                    goodLink = badLink.href.replace('m.', 'www.');
+                    goodLink = badLink.href.replace('m.', 'www.').replace('touch.', 'www.');
                 }
 
                 else {
                     const postId = badLink.searchParams.get('story_fbid');
                     const userId = badLink.searchParams.get('id');
 
-                    if (!postId || !userId || badInput.value.indexOf('m.') < 0) {
+                    if (!postId || !userId || (badInput.value.indexOf('m.') < 0 && badInput.value.indexOf('touch.') < 0 )) {
                         throw new Error('Your link is not shitty enough!');
                     }
 
