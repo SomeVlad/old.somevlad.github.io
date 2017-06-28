@@ -11,13 +11,13 @@
 // cache, then increment the CACHE_VERSION value. It will kick off the service worker update
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
-var CACHE_VERSION = 10;
+var CACHE_VERSION = 12;
 var CURRENT_CACHES = {
     prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
 
 self.addEventListener('install', function(event) {
-    var now = Date.now();
+    // var now = Date.now() + CACHE_VERSION;
 
     var urlsToPrefetch = [
         '/',
@@ -25,13 +25,13 @@ self.addEventListener('install', function(event) {
         '/about/',
         'https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic',
         'https://fonts.googleapis.com/css?family=Lato:900,300',
-        '/images/tags.svg'
+        '/images/tags.svg' 
     ];
 
     // All of these logging statements should be visible via the "Inspect" interface
     // for the relevant SW accessed via chrome://serviceworker-internals
 
-    event.waitUntil(
+    event.waitUntil( 
         caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
             var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
                 // This constructs a new URL object using the service worker's script location as the base
@@ -43,7 +43,7 @@ self.addEventListener('install', function(event) {
                 // If we were to get back a response from the HTTP browser cache for this precaching request
                 // then that stale response would be used indefinitely, or at least until the next time
                 // the service worker script changes triggering the install flow.
-                url.search += (url.search ? '&' : '?') + 'cache-bust=' + now;
+                // url.search += (url.search ? '&' : '?') + 'cache-bust=' + now;
 
                 // It's very important to use {mode: 'no-cors'} if there is any chance that
                 // the resources being fetched are served off of a server that doesn't support
