@@ -53,12 +53,12 @@ const options = {
 element.getAnimations() // returns an array of animations or transitions applied to our element using CSS or WAAPI
         .map((animation) => {
             animation.pause()
-            animation.play();
-            animation.playbackRate = 2; // speed it up
-            animation.playbackRate = .4; // use a number less than one to slow it down
+            animation.play()
+            animation.playbackRate = 2 // speed it up
+            animation.playbackRate = .4 // use a number less than one to slow it down
             // events
             animation.onfinish = function() {
-              element.remove();
+              element.remove()
             }
             // and promises
             animation.finished.then(() =>
