@@ -17,7 +17,7 @@ const element = document.querySelector('.animate-me');
 element.animate(keyframes, options);
 ```
 1. `keyframes` is an array of objects, representing frames. 
-1. Syntax is similar to `keyframes` from CSS. *kebab-case* must be converted to *lowerCamelCase*.
+1. Syntax is similar to `@keyframes` from CSS. *kebab-case* must be converted to *lowerCamelCase*.
 ```js
 const keyframes = [
     { 
