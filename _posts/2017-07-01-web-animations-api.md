@@ -20,29 +20,31 @@ element.animate(keyframes, options);
 1. Syntax is similar to `keyframes` from CSS. *kebab-case* must be converted to *lowerCamelCase*.
 ```js
 const keyframes = [
-  { 
-    transform: 'translateY(-1000px) scaleY(2.5) scaleX(.2)', 
-    transformOrigin: '50% 0', filter: 'blur(40px)', opacity: 0 
-  },
-  { 
-    transform: 'translateY(0) scaleY(1) scaleX(1)',
-    transformOrigin: '50% 50%',
-    filter: 'blur(0)',
-    opacity: 1 
-  }
+    { 
+        transform: 'translateY(-1000px) scaleY(2.5) scaleX(.2)', 
+        transformOrigin: '50% 0', 
+        filter: 'blur(40px)', 
+        opacity: 0 
+    },
+    { 
+        transform: 'translateY(0) scaleY(1) scaleX(1)',
+        transformOrigin: '50% 50%',
+        filter: 'blur(0)',
+        opacity: 1 
+    }
 ];
 ```
 1. `options` is an object containing, well, options:
 ```js
 const options = {
-  iterations: Infinity, // number of iterations, animation-iteration-count
-  iterationStart: 0, // first iteration, may be decimal
-  delay: 0, // delay 
-  endDelay: 0, // delay between animations 
-  direction: 'alternate', // animation-direction basically 
-  duration: 700, // duration in ms
-  fill: 'forwards', // animation-fill-mode
-  easing: 'ease-out', // default is `linear` instead of `ease` in CSS (animation-timing-function)
+    iterations: Infinity, // number of iterations, animation-iteration-count
+    iterationStart: 0, // first iteration, may be decimal
+    delay: 0, // delay 
+    endDelay: 0, // delay between animations 
+    direction: 'alternate', // animation-direction basically 
+    duration: 700, // duration in ms
+    fill: 'forwards', // animation-fill-mode
+    easing: 'ease-out', // default is `linear` instead of `ease` in CSS (animation-timing-function)
 }
 ```
 1. You don't have to use `will-change` with it.
