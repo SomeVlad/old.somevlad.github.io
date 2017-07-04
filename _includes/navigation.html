@@ -1,10 +1,5 @@
-{% for page in site.pages %}
-    {% if page.tags contains "about" %}
-        <a href="{{ page.url }}">{{ page.title }}</a>
-    {% endif %}
-{% endfor %}
-{% for page in site.pages %}
-    {% if page.tags contains "contact" %}
-        <a href="{{ page.url }}">{{ page.title }}</a>
-    {% endif %}
-{% endfor %}
+{% if page.title == "About" %}{% else %}
+<a href="/about">About</a>
+{% endif %}
+
+<a href="/404" title="So you have a chance to get there">404</a>

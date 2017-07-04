@@ -109,23 +109,6 @@ window.onload = () => {
         }
 
         render() {
-
-
-            // if (!this.ctx || !global.svgPath) setTimeout(kek.bind(this), 1000);
-            // else kek.bind(this)
-            //
-            // function kek() {
-            //     if (this.ctx.isPointInPath(global.svgPath, this.x, this.y)) {
-            //         this.opacity = 1;
-            //         this.r = 1;
-            //         global.stars.push(new Star({
-            //             ctx: this.ctx,
-            //             x: global.plusminus(this.x, 1),
-            //             y: global.plusminus(this.y, 1)
-            //         }));
-            //     }
-            // }
-
             const gradient = this.ctx.createRadialGradient(this.x, this.y, 0, this.x + this.r, this.y + this.r, this.r * 2)
             gradient.addColorStop(0, 'rgba(255, 255, 255, ' + this.opacity + ')')
             gradient.addColorStop(1, global.backgroundColor)
@@ -143,5 +126,8 @@ window.onload = () => {
     }
 
     const canvasElem = document.getElementById('stars')
+    document.querySelector('.goback').addEventListener('click', () => {
+        window.location.href = '/'
+    })
     new CanvasApp(canvasElem)
 }
