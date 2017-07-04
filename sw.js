@@ -20,6 +20,7 @@ self.addEventListener('install', function(event) {
     // var now = Date.now() + CACHE_VERSION;
 
     var urlsToPrefetch = [
+        location.href,
         '/',
         '/css/style.css',
         '/about/',
