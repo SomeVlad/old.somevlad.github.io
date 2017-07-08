@@ -34,3 +34,9 @@ tags: about
 - [instagram](https://instagram.com/some_vlad){:target="_blank" rel="noopener noreferrer"}
 - [telegram](https://t.me/some_vlad){:target="_blank" rel="noopener noreferrer"} 
 ([channel](https://t.me/vladsamoylov){:target="_blank" rel="noopener noreferrer"})
+
+----------
+
+<small>If something doesn't work on this site in your browser, consider using Chrome. 
+It doesn't mean I don't know how to copypaste polyfills and compile es6 to es5.
+I just want this site to be my playground, not a job.</small>

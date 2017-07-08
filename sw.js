@@ -4,23 +4,22 @@
 // It maps a shorthand identifier for a cache to a specific, versioned cache name.
 
 // Note that since global state is discarded in between service worker restarts, these
-// variables will be reinitialized each time the service worker handles an event, and you
+// constiables will be reinitialized each time the service worker handles an event, and you
 // should not attempt to change their values inside an event handler. (Treat them as constants.)
 
 // If at any point you want to force pages that use this service worker to start using a fresh
 // cache, then increment the CACHE_VERSION value. It will kick off the service worker update
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
-var CACHE_VERSION = 14;
-var CURRENT_CACHES = {
+const CACHE_VERSION = 15;
+const CURRENT_CACHES = {
     prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
 
 self.addEventListener('install', function(event) {
-    // var now = Date.now() + CACHE_VERSION;
+    // const now = Date.now() + CACHE_VERSION;
 
-    var urlsToPrefetch = [
-        location.href,
+    const urlsToPrefetch = [
         '/',
         '/css/style.css',
         '/about/',
@@ -28,16 +27,17 @@ self.addEventListener('install', function(event) {
         'https://fonts.googleapis.com/css?family=Lato:900,300',
         '/images/tags.svg' 
     ];
+    if (location.href.indexOf('random') < 0) urlsToPrefetch.push(location.href)
 
     // All of these logging statements should be visible via the "Inspect" interface
     // for the relevant SW accessed via chrome://serviceworker-internals
 
     event.waitUntil( 
         caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
-            var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
+            const cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
                 // This constructs a new URL object using the service worker's script location as the base
                 // for relative URLs.
-                var url = new URL(urlToPrefetch, location.href);
+                const url = new URL(urlToPrefetch, location.href);
                 // Append a cache-bust=TIMESTAMP URL parameter to each URL's query string.
                 // This is particularly important when precaching resources that are later used in the
                 // fetch handler as responses directly, without consulting the network (i.e. cache-first).
@@ -56,7 +56,7 @@ self.addEventListener('install', function(event) {
                 // (https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#cross-origin-resources)
                 // and it is not possible to determine whether an opaque response represents a success or failure
                 // (https://github.com/whatwg/fetch/issues/14).
-                var request = new Request(url, {mode: 'no-cors'});
+                const request = new Request(url, {mode: 'no-cors'});
                 return fetch(request).then(function(response) {
                     if (response.status >= 400) {
                         throw new Error('request for ' + urlToPrefetch +
@@ -82,7 +82,7 @@ self.addEventListener('activate', function(event) {
     // Delete all caches that aren't named in CURRENT_CACHES.
     // While there is only one cache in this example, the same logic will handle the case where
     // there are multiple versioned caches.
-    var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
+    const expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
         return CURRENT_CACHES[key];
     });
 

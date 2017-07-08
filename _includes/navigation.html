@@ -1,5 +1,7 @@
 {% if page.title == "About" %}{% else %}
-<a href="/about">About</a>
+    <a href="/about">About</a>
+    <a href="/404" title="So you have a chance to get there">404</a>
+    {% if page.title == "Яandom" %}{% else %}
+        <a href="/random">Яandom</a>
+    {% endif %}
 {% endif %}
-
-<a href="/404" title="So you have a chance to get there">404</a>

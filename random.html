@@ -1,0 +1,258 @@
+---
+layout: page
+title: Яandom
+permalink: /random/
+---
+<small>Twitter, kinda. With templates, custom elements and encapsulated styles.
+    Supports texts, images, tweets, youtube videos and instagram photos.
+</small>
+
+<div id="entries">
+    <template id="random-entry-style">
+        <style>
+            :host {
+                display: block;
+                position: relative;
+                border-top: 1px solid #eeeeee;
+                margin-top: 10px;
+            }
+
+            :host:not(:first-of-type) {
+                margin-top: 10px;
+            }
+
+            .centered {
+                max-width: 32rem;
+                display: block;
+                margin: 0 auto;
+            }
+
+            :host > time {
+                background-color: #333333;
+                padding: 0 10px;
+                position: absolute;
+                top: -1px;
+                left: 23px;
+                color: #ffffff;
+                border-radius: 0 0 5px 5px;
+            }
+
+            text, .tweet, .video, .instagram {
+                /*padding: 1.8em 1em;*/
+            }
+
+            :host > *:nth-child(n + 4) {
+                padding: 0 1.8em 1em;
+            }
+
+            :host > *:nth-child(4) {
+                padding: 1.8em 1em 1em;;
+            }
+
+            .instagram .image-link {
+                padding: 0;
+            }
+
+            a.image-link {
+                /*padding: 0 1em 1.8em;*/
+            }
+
+            a.image-link img {
+                width: 100%;
+            }
+
+            a.hash-link {
+                background-color: #eeeeee;
+                font-size: 1em;
+                position: absolute;
+                top: -1px;
+                left: 0;
+                color: #999999;
+                border-radius: 0 0 5px 5px;
+                text-decoration: none;
+                padding: 0 5px;
+            }
+
+            .video {
+                padding: 0 1em 1.8em;
+            }
+
+            .video .embed-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                height: 0;
+                overflow: hidden;
+                max-width: 100%;
+                margin-bottom: 1.5em;
+            }
+
+            .video .embed-container iframe, .video .embed-container object, .video .embed-container embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            blockquote.twitter-tweet {
+                display: inline-block;
+                padding: 16px;
+                margin: 10px 0;
+                border: #ddd 1px solid;
+                border-top-color: #eee;
+                border-bottom-color: #bbb;
+                border-radius: 5px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                font: bold 14px/18px Helvetica, Arial, sans-serif;
+                color: #000;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            blockquote.twitter-tweet p {
+                font: normal 18px/24px Georgia, "Times New Roman", Palatino, serif;
+                margin: 0 5px 10px 0;
+            }
+
+            blockquote.twitter-tweet a[href^="https://twitter.com"] {
+                font-weight: normal;
+                color: #666;
+                font-size: 12px;
+            }
+        </style>
+    </template>
+</div>
+
+<script>
+    function jsonp(uri) {
+        return new Promise(function (resolve, reject) {
+            var id = '_' + Math.round(10000 * Math.random())
+            var callbackName = 'jsonp_callback_' + id
+            window[callbackName] = function (data) {
+                delete window[callbackName]
+                var ele = document.getElementById(id)
+                ele.parentNode.removeChild(ele)
+                resolve(data)
+            }
+
+            var src = uri + '&callback=' + callbackName
+            var script = document.createElement('script')
+            script.src = src
+            script.id = id;
+            (document.getElementsByTagName('head')[0] || document.body || document.documentElement).appendChild(script)
+            script.addEventListener('error', reject)
+        })
+    }
+
+    const containerNode = document.querySelector('#entries')
+    const entryStyleTemplate = containerNode.querySelector('#random-entry-style')
+
+    class RandomEntry extends HTMLElement {
+        constructor(options, index) {
+            super();
+            this.shadow = this.attachShadow({mode: 'open'});
+            this.style = entryStyleTemplate
+            this.id = index;
+            const attributesArray = Array.from(Object.keys(options))
+            attributesArray.map((attr) => {
+                if (options[attr]) this[attr] = options[attr]
+            })
+            containerNode.appendChild(this)
+        }
+
+        connectedCallback(m) {
+            // console.log('element mounted into DOM')
+        }
+
+        set style(templateNode) {
+            this.shadow.appendChild(document.importNode(templateNode.content, true))
+        }
+
+        set id(val) {
+            const hashLink = document.createElement('a')
+            hashLink.setAttribute('class', 'hash-link')
+            hashLink.setAttribute('href', `#${val}`)
+            hashLink.textContent = '#'
+            this.shadow.appendChild(hashLink)
+            this.setAttribute('id', val)
+        }
+
+        set date(val) {
+            const dateNode = document.createElement('time')
+            dateNode.textContent = val
+            this.shadow.appendChild(dateNode)
+        }
+
+        set text(val) {
+            const textNode = document.createElement('text');
+            textNode.innerHTML = val;
+            textNode.setAttribute('class', 'centered');
+            this.shadow.appendChild(textNode)
+        }
+
+        set image(val) {
+            const imageNode = document.createElement('img');
+            imageNode.src = val;
+            const imageLinkNode = document.createElement('a');
+            imageLinkNode.setAttribute('href', val)
+            imageLinkNode.setAttribute('class', 'image-link centered')
+            imageLinkNode.setAttribute('target', '_blank')
+            imageLinkNode.setAttribute('rel', 'noopener noreferrer')
+            imageLinkNode.appendChild(imageNode)
+            this.shadow.appendChild(imageLinkNode)
+        }
+
+        set video(val) {
+            const videoNode = document.createElement('div')
+            videoNode.setAttribute('class', 'video centered')
+            videoNode.innerHTML = `<div class='embed-container'><iframe src='https://www.youtube.com/embed/${val}' frameborder='0' allowfullscreen></iframe></div>`
+            this.shadow.appendChild(videoNode)
+        }
+
+        set instagram(val) {
+            let fetchUrl = `https://api.instagram.com/oembed?url=http://instagr.am/p/${val}/`
+            const instagramPhotoNode = document.createElement('div')
+            jsonp(fetchUrl, true).then(function (data) {
+                const imageLink = data['thumbnail_url']
+                const imageNode = document.createElement('img');
+                imageNode.src = imageLink;
+                const imageLinkNode = document.createElement('a');
+                imageLinkNode.appendChild(imageNode)
+                imageLinkNode.setAttribute('href', `https://www.instagram.com/p/${val}/`)
+                imageLinkNode.setAttribute('class', 'image-link centered')
+                imageLinkNode.setAttribute('target', '_blank')
+                imageLinkNode.setAttribute('rel', 'noopener noreferrer')
+                instagramPhotoNode.setAttribute('class', 'instagram')
+                instagramPhotoNode.appendChild(imageLinkNode)
+            })
+            this.shadow.appendChild(instagramPhotoNode)
+        }
+
+        set tweet(val) {
+            let fetchUrl = `https://api.twitter.com/1/statuses/oembed.json?url=${val}`
+            const tweetNode = document.createElement('div')
+            tweetNode.setAttribute('class', 'tweet centered')
+            jsonp(fetchUrl).then(function (data) {
+                tweetNode.innerHTML = data.html
+            })
+            this.shadow.appendChild(tweetNode)
+        }
+    }
+
+    customElements.define('random-entry', RandomEntry);
+
+    const reqUrl = '/data/random.json'
+
+    fetch(reqUrl)
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            const entriesArray = data.entries
+
+            entriesArray.map((entry, idx) => {
+                new RandomEntry(entry, idx)
+            })
+        })
+        .catch(console.log);
+</script>
