@@ -11,7 +11,7 @@
 // cache, then increment the CACHE_VERSION value. It will kick off the service worker update
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
-const CACHE_VERSION = 16;
+const CACHE_VERSION = 17;
 const CURRENT_CACHES = {
     prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
@@ -22,9 +22,15 @@ self.addEventListener('install', function(event) {
     const urlsToPrefetch = [
         '/css/style.css',
         '/about/',
-        'https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic',
-        'https://fonts.googleapis.com/css?family=Lato:900,300',
-        '/images/tags.svg' 
+        '/css/fonts/merriweather-boldit-webfont.woff2',
+        '/css/fonts/merriweather-lightit-webfont.woff2',
+        '/css/fonts/merriweather-bold-webfont.woff2',
+        '/css/fonts/merriweather_light-webfont.woff2',
+        '/css/fonts/lato-lightitalic-webfont.woff2',
+        '/css/fonts/lato-light-webfont.woff2',
+        '/css/fonts/lato-blackitalic-webfont.woff2',
+        '/css/fonts/lato-black-webfont.woff2',
+        '/images/tags.svg'
     ];
     if (location.href.indexOf('random') < 0) urlsToPrefetch.push(location.href)
 
