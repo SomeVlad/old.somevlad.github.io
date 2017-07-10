@@ -4,7 +4,7 @@ title:      Making cross-browser «copy to clipboard» button
 date:       2016-12-17 18:00:00
 summary:    Problems you might have encountered if you ever tried to use execCommand().
 permalink:  /copy-to-clipboard-execcommand-hell/
-tags:       DIY frontend
+tags:       DIY js
 ---
 
 It's been [a while](https://w3c.github.io/editing/execCommand.html) since execCommand() got "Unofficial Draft" status, and it has basic support in Chrome, so it's already time to test it. (I mean, it's 2016, right?)  
