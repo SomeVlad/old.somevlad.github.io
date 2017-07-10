@@ -1,36 +1,33 @@
 {
   "entries": [
     {
+      "date": "10 Jul",
+      "text": "That domain name is ironic BTW."
+    },
+    {
+      "date": "10 Jul",
+      "text": "Probably the most useful video about event loop for everyone sentenced to work with javascript. Especially surprising that these concepts are highly attention deprived, even though most of the javascript developers have to deal with them on a daily basis.",
+      "video": "8aGhZQkoFbQ"
+    },
+    {
       "date": "8 Jul",
       "text": "Texts and images!",
-      "image": "/images/welcome-to-internet.jpg",
-      "tweet": "",
-      "video": "",
-      "instagram": ""
+      "image": "/images/welcome-to-internet.jpg"
     },
     {
       "date": "8 Jul",
       "text": "Tweets!",
-      "image": "",
-      "tweet": "https://twitter.com/SomeVlad/status/883645863092006912",
-      "video": "",
-      "instagram": ""
+      "tweet": "https://twitter.com/SomeVlad/status/883645863092006912"
     },
     {
       "date": "8 Jul",
       "text": "Instagram photos!",
-      "image": "",
-      "tweet": "",
-      "video": "",
       "instagram": "BWGBvk2Hj8k"
     },
     {
       "date": "8 Jul",
       "text": "Youtube videos!",
-      "image": "",
-      "tweet": "",
-      "video": "oHg5SJYRHA0",
-      "instagram": ""
+      "video": "oHg5SJYRHA0"
     }
   ]
 }

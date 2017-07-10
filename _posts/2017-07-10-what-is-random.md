@@ -13,7 +13,7 @@ You may have noticed another link appeared in the header of the site saying
 
 ## Yeah, what is&nbsp;this?
 
-What is&nbsp;it&nbsp;is&nbsp;basically my&nbsp;own twitter,
+It&nbsp;is&nbsp;basically my&nbsp;own twitter,
 where&nbsp;I can share anything&nbsp;I want&nbsp;to.
 
 ## Why not use blog posts tho? 
@@ -61,7 +61,7 @@ It is structured like this:
 *Custom elements* definitely have a room to grow in terms of
 browser support. But let's check it out.
 
-First we have to create new class extending HTMLElement and define it.
+First we have to create new class extending `HTMLElement` and define it.
 ```js
 const containerNode = document.querySelector('#entries')
 
@@ -73,6 +73,8 @@ class RandomEntry extends HTMLElement {
         containerNode.appendChild(this)
     }
 }
+
+customElements.define('random-entry', RandomEntry);
 ```
 
 Now let's pass fetched data to a constructor:
@@ -87,7 +89,7 @@ fetch(reqUrl)
 
 I chose to not go the attributes way, because this data
 is unlikely to be reused or changed. So we have data in our constructor,
-and now we have to create handlers and pass them key values.
+and now we have to create handlers and pass them these options.
 For that purposes we can `set` data.
 
 ```js
