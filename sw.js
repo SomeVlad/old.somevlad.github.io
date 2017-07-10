@@ -11,7 +11,7 @@
 // cache, then increment the CACHE_VERSION value. It will kick off the service worker update
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
-const CACHE_VERSION = 15;
+const CACHE_VERSION = 16;
 const CURRENT_CACHES = {
     prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
@@ -20,7 +20,6 @@ self.addEventListener('install', function(event) {
     // const now = Date.now() + CACHE_VERSION;
 
     const urlsToPrefetch = [
-        '/',
         '/css/style.css',
         '/about/',
         'https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic',
