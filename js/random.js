@@ -22,11 +22,11 @@ const containerNode = document.querySelector('#entries')
 const entryStyleTemplate = containerNode.querySelector('#random-entry-style')
 
 class RandomEntry extends HTMLElement {
-    constructor(options, index) {
+    constructor(options, index, entriesLength) {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         this.style = entryStyleTemplate
-        this.id = index;
+        this.id = entriesLength - index;
         const attributesArray = Array.from(Object.keys(options))
         attributesArray.map((attr) => {
             if (options[attr]) this[attr] = options[attr]
@@ -115,5 +115,5 @@ const reqUrl = '/data/random.json'
 
 fetch(reqUrl)
     .then(response => response.json())
-    .then(data => data.entries.map((entry, idx) => new RandomEntry(entry, idx)))
+    .then(data => data.entries.map((entry, idx) => new RandomEntry(entry, idx, data.entries.length)))
     .catch(console.log);
