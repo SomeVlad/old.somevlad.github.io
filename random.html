@@ -15,7 +15,7 @@ permalink: /random/
                 display: block;
                 position: relative;
                 border-top: 1px solid #eeeeee;
-                margin-top: 10px;
+                padding-bottom: 10px;
             }
 
             :host:not(:first-of-type) {
@@ -125,3 +125,15 @@ permalink: /random/
 </div>
 
 <script src="/js/random.js"></script>
+
+<script defer>
+    window.onload = function () {
+        const hash = window.location.hash
+        if (hash) {
+            setTimeout(() => {
+                window.location.hash = ''
+                window.location.hash = hash
+            })
+        }
+    }
+</script>

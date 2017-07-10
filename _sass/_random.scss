@@ -1,5 +1,17 @@
 #entries {
   margin-top: 50px
+}
 
+.highlighted {
+  background-color: #fff7e3;
+  animation: lighten 10s linear forwards;
+}
 
+@keyframes lighten {
+  0% {
+    background-color: #fff7e3;
+  }
+  100% {
+    background-color: #ffffff;
+  }
 }

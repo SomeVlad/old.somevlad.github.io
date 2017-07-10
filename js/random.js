@@ -44,6 +44,7 @@ class RandomEntry extends HTMLElement {
         hashLink.setAttribute('href', `#${val}`)
         hashLink.textContent = '#'
         this.setAttribute('id', val)
+        if (val === parseInt(window.location.hash.slice(-1))) this.classList.add('highlighted')
         this.shadow.appendChild(hashLink)
     }
 
