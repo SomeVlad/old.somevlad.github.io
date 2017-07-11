@@ -128,45 +128,47 @@ class RandomEntry extends HTMLElement {
             linkNode.textContent = link.text
             linkNode.appendChild(previewBox)
 
-            jsonp(url)
-                .then(data => {
-                    let type = 'wide';
-                    const descriptionNode = document.createElement('div')
-                    const titleNode = document.createElement('div')
-                    const propsArray = Object.keys(data)
-                    if (!propsArray.includes('error')) {
-                        Object.keys(data)
-                            .filter((key) => data[key])
-                            .forEach((key) => {
-                                if (key === 'image') {
-                                    const imageNode = new Image()
-                                    imageNode.src = data.image
-                                    imageNode.addEventListener("load", function () {
-                                        type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
-                                    });
-                                    previewBox.appendChild(imageNode)
-                                }
+            if (location.protocol !== 'https:' && !location.host.includes('localhost')) {
+                jsonp(url)
+                    .then(data => {
+                        let type = 'wide';
+                        const descriptionNode = document.createElement('div')
+                        const titleNode = document.createElement('div')
+                        const propsArray = Object.keys(data)
+                        if (!propsArray.includes('error')) {
+                            Object.keys(data)
+                                .filter((key) => data[key])
+                                .forEach((key) => {
+                                    if (key === 'image') {
+                                        const imageNode = new Image()
+                                        imageNode.src = data.image
+                                        imageNode.addEventListener("load", function () {
+                                            type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
+                                        });
+                                        previewBox.appendChild(imageNode)
+                                    }
 
-                                if (key === 'title') {
-                                    titleNode.textContent = data[key]
-                                    titleNode.classList.add('link-title')
-                                    previewBox.appendChild(titleNode)
-                                }
+                                    if (key === 'title') {
+                                        titleNode.textContent = data[key]
+                                        titleNode.classList.add('link-title')
+                                        previewBox.appendChild(titleNode)
+                                    }
 
-                                if (key === 'description') {
-                                    descriptionNode.textContent = data[key]
-                                    descriptionNode.classList.add('link-description')
-                                    previewBox.appendChild(descriptionNode)
-                                }
-                            })
-                        previewBox.classList.add(type)
-                        previewBox.classList.remove('is-hidden')
-                    }
-                })
+                                    if (key === 'description') {
+                                        descriptionNode.textContent = data[key]
+                                        descriptionNode.classList.add('link-description')
+                                        previewBox.appendChild(descriptionNode)
+                                    }
+                                })
+                            previewBox.classList.add(type)
+                            previewBox.classList.remove('is-hidden')
+                        }
+                    })
 
-
+            }
             previewBox.classList.add('preview-box', 'is-hidden')
             container.appendChild(linkNode)
+
         })
         container.classList.add('preview-container', 'centered')
         this.shadow.appendChild(container)
