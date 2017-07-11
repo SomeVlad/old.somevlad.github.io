@@ -108,6 +108,30 @@ class RandomEntry extends HTMLElement {
         })
         this.shadow.appendChild(tweetNode)
     }
+
+    set links(arr) { // This live preview for <a href="http://en.wikipedia.org/">Wikipedia</a><div class="box"><iframe src="http://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div> remains open on mouseover.
+
+        const container = document.createElement('div')
+        arr.map((link, idx) => {
+            const linkNode = document.createElement('a');
+            const iframe = document.createElement('iframe')
+            const previewBox = document.createElement('div')
+            iframe.setAttribute('width', '500px')
+            iframe.setAttribute('height', '500px')
+            iframe.setAttribute('src', link.href)
+            linkNode.setAttribute('href', link.href)
+            linkNode.setAttribute('rel', 'noopener noreferrer')
+            linkNode.setAttribute('target', '_blank')
+            linkNode.textContent = link.text
+            linkNode.classList.add('preview-link')
+            previewBox.classList.add('preview-box')
+            previewBox.appendChild(iframe)
+            container.appendChild(linkNode)
+            container.appendChild(previewBox)
+        })
+        container.classList.add('centered')
+        this.shadow.appendChild(container)
+    }
 }
 
 customElements.define('random-entry', RandomEntry);

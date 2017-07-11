@@ -2,7 +2,13 @@
   "entries": [
     {
       "date": "11 July",
-      "text": "<a href='https://hackernoon.com/es8-was-released-and-here-are-its-main-new-features-ee9c394adf66' rel='noopener noreferrer' target='_blank'>ES8 (ES2017) main features"
+      "text": "",
+      "links": [
+        {
+          "href": "https://hackernoon.com/es8-was-released-and-here-are-its-main-new-features-ee9c394adf66",
+          "text": "ES8 (ES2017) main features"
+        }
+      ]
     },
     {
       "date": "11 July",

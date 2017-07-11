@@ -120,6 +120,17 @@ permalink: /random/
                 color: #666;
                 font-size: 12px;
             }
+
+            .preview-box{
+                display: none;
+                width: 100%;
+            }
+
+            .preview-link:hover + .preview-box,.preview-box:hover{
+                display: block;
+                position: relative;
+                z-index: 100;
+            }
         </style>
     </template>
 </div>
