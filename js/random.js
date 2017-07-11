@@ -112,7 +112,8 @@ class RandomEntry extends HTMLElement {
     set links(arr) { // This live preview for <a href="http://en.wikipedia.org/">Wikipedia</a><div class="box"><iframe src="http://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div> remains open on mouseover.
 
         const container = document.createElement('div')
-        arr.map((link, idx) => {
+
+        arr.forEach((link, idx) => {
             const linkNode = document.createElement('a');
             const previewBox = document.createElement('div')
 
@@ -120,22 +121,49 @@ class RandomEntry extends HTMLElement {
             const key = '5964d5a1a1e7b4e257179772a18e4dc9cf9280e57c56c'
             const url = `http://api.linkpreview.net/?key=${key}&q=${target}`
 
+            linkNode.href = target
+            linkNode.setAttribute('target', '_blank')
+            linkNode.setAttribute('rel', 'noopener noreferrer')
+            linkNode.classList.add('preview-link')
+            linkNode.textContent = link.text
+            linkNode.appendChild(previewBox)
+
             jsonp(url)
                 .then(data => {
-                    console.log(data)
+                    let type = 'wide';
+                    const descriptionNode = document.createElement('div')
+                    const titleNode = document.createElement('div')
+                    Object.keys(data).filter((key) => data[key]).forEach((key) => {
+                        if (key === 'image') {
+                            const imageNode = new Image()
+                            imageNode.src = data.image
+                            imageNode.addEventListener("load", function () {
+                                type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
+                            });
+                            previewBox.appendChild(imageNode)
+                        }
 
+                        if (key === 'title') {
+                            titleNode.textContent = data[key]
+                            titleNode.classList.add('link-title')
+                            previewBox.appendChild(titleNode)
+                        }
+
+                        if (key === 'description') {
+                            descriptionNode.textContent = data[key]
+                            descriptionNode.classList.add('link-description')
+                            previewBox.appendChild(descriptionNode)
+                        }
+                    })
+                    previewBox.classList.add(type)
+                    previewBox.classList.remove('is-hidden')
                 })
-            linkNode.setAttribute('href', link.href)
-            linkNode.setAttribute('rel', 'noopener noreferrer')
-            linkNode.setAttribute('target', '_blank')
-            linkNode.textContent = link.text
-            linkNode.classList.add('preview-link')
-            previewBox.classList.add('preview-box')
-            container.classList.add('preview-container')
-            linkNode.appendChild(previewBox)
+
+
+            previewBox.classList.add('preview-box', 'is-hidden')
             container.appendChild(linkNode)
         })
-        container.classList.add('centered')
+        container.classList.add('preview-container', 'centered')
         this.shadow.appendChild(container)
     }
 }
