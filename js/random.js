@@ -128,44 +128,47 @@ class RandomEntry extends HTMLElement {
             linkNode.textContent = link.text
             linkNode.appendChild(previewBox)
 
-            if (location.protocol !== 'https:' && !location.host.includes('localhost')) {
-                jsonp(url)
-                    .then(data => {
-                        let type = 'wide';
-                        const descriptionNode = document.createElement('div')
-                        const titleNode = document.createElement('div')
-                        const propsArray = Object.keys(data)
-                        if (!propsArray.includes('error')) {
-                            Object.keys(data)
-                                .filter((key) => data[key])
-                                .forEach((key) => {
-                                    if (key === 'image') {
-                                        const imageNode = new Image()
-                                        imageNode.src = data.image
-                                        imageNode.addEventListener("load", function () {
-                                            type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
-                                        });
-                                        previewBox.appendChild(imageNode)
-                                    }
+            const app_id = '5965421a07efcb0b00a6d42d'
+            const ogurl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(target)}?app_id=${app_id}`
+            fetch(ogurl)
+                .then(response => response.json())
+                .then(data => {
+                    let type = 'wide';
+                    const descriptionNode = document.createElement('div')
+                    const titleNode = document.createElement('div')
 
-                                    if (key === 'title') {
-                                        titleNode.textContent = data[key]
-                                        titleNode.classList.add('link-title')
-                                        previewBox.appendChild(titleNode)
-                                    }
+                    const propsArray = Object.keys(data)
+                    if (!propsArray.includes('error')) {
+                        const imageSrc = data.openGraph.image.url || data.hybridGraph.image || data.htmlInferred.image_guess || ""
+                        const title = data.openGraph.title || data.hybridGraph.title || data.htmlInferred.title || ""
+                        const description = data.openGraph.description || data.hybridGraph.description || data.htmlInferred.description || ""
 
-                                    if (key === 'description') {
-                                        descriptionNode.textContent = data[key]
-                                        descriptionNode.classList.add('link-description')
-                                        previewBox.appendChild(descriptionNode)
-                                    }
-                                })
-                            previewBox.classList.add(type)
-                            previewBox.classList.remove('is-hidden')
+                        if (imageSrc) {
+                            const imageNode = new Image()
+                            imageNode.src = imageSrc
+                            imageNode.addEventListener("load", function () {
+                                type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
+                            });
+                            previewBox.appendChild(imageNode)
+
                         }
-                    })
+                        if (title) {
+                            titleNode.textContent = title
+                            titleNode.classList.add('link-title')
+                            previewBox.appendChild(titleNode)
+                        }
 
-            }
+                        if (description) {
+                            descriptionNode.textContent = description
+                            descriptionNode.classList.add('link-description')
+                            previewBox.appendChild(descriptionNode)
+                        }
+
+                        previewBox.classList.add(type)
+                        previewBox.classList.remove('is-hidden')
+                    }
+                })
+
             previewBox.classList.add('preview-box', 'is-hidden')
             container.appendChild(linkNode)
 
