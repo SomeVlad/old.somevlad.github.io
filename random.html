@@ -3,8 +3,8 @@ layout: page
 title: Яandom
 permalink: /random/
 ---
-<small>Twitter, kinda. With templates, custom elements and encapsulated styles.
-    Supports texts, images, tweets, youtube videos and instagram photos.
+<small>Twitter, kinda. With templates, custom elements, grids, object-fit and encapsulated styles.
+    Supports link previews, texts, images, tweets, youtube videos and instagram photos.
     If something doesn't feel right, please consider using Chrome.
 </small>
 
@@ -131,34 +131,53 @@ permalink: /random/
                 margin-bottom: 1.5em;
             }
 
-            .preview-box{
+            .preview-box {
                 border: 1px solid #eeeeee;
                 width: 100%;
-                display: flex;
-                flex-direction: column;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                align-content: stretch;
-                align-items: stretch;
+                display: grid;
+
+            }
+
+            .preview-box.wide {
+                grid-template: "b b b"
+                               "c c c"
+                               "a a a";
+            }
+
+            .preview-box.tall {
+                grid-template: "a b b"
+                               "a c c"
+                               "a d d"
+                               "a d d"
+                               "a d d";
             }
 
             .preview-box .link-title {
-                order: 1;
+                grid-area: b;
                 color: #333;
                 margin: 0.5em 0.5em 0.3em;
                 font-size: 1.1em;
+
             }
 
             .preview-box .link-description {
-                order: 2;
+                grid-area: c;
                 margin: 0 0.7em 1em;
                 color: #333;
                 font-size: 0.8em;
             }
 
+            .preview-box img {
+                object-fit: contain;
+                grid-area: a;
+            }
+
             .preview-box.wide img {
                 width: 100%;
-                order: 3;
+            }
+
+            .preview-box.tall img {
+                max-height: 22em;
             }
 
             .is-hidden {
@@ -169,7 +188,8 @@ permalink: /random/
                 text-decoration: none;
                 color: #0076df;
             }
-            a:hover, a:focus, a:active, a:hover > *, a:focus > *, a:active > *{
+
+            a:hover, a:focus, a:active, a:hover > *, a:focus > *, a:active > * {
                 color: #000a13;
                 text-decoration: none;
             }

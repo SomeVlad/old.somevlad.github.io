@@ -133,7 +133,7 @@ class RandomEntry extends HTMLElement {
             fetch(ogurl)
                 .then(response => response.json())
                 .then(data => {
-                    let type = 'wide';
+                    let type = '';
                     const descriptionNode = document.createElement('div')
                     const titleNode = document.createElement('div')
 
@@ -148,6 +148,7 @@ class RandomEntry extends HTMLElement {
                             imageNode.src = imageSrc
                             imageNode.addEventListener("load", function () {
                                 type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
+                                previewBox.classList.add(type)
                             });
                             previewBox.appendChild(imageNode)
 
@@ -164,7 +165,7 @@ class RandomEntry extends HTMLElement {
                             previewBox.appendChild(descriptionNode)
                         }
 
-                        previewBox.classList.add(type)
+
                         previewBox.classList.remove('is-hidden')
                     }
                 })
