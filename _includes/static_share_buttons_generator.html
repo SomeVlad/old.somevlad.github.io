@@ -156,7 +156,7 @@
             const url = encodeURIComponent(urlShareInput.value.trim());
             const summary = encodeURIComponent(summaryShareInput.value.trim());
             previewBox.innerHTML = '';
-            Array.from(Object.keys(selectBoxState))
+            Object.keys(selectBoxState)
                 .filter(item => selectBoxState[item].checked)
                 .map(item => {
                     const link = document.createElement("A");

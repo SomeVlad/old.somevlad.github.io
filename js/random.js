@@ -27,8 +27,8 @@ class RandomEntry extends HTMLElement {
         this.shadow = this.attachShadow({mode: 'open'});
         this.style = entryStyleTemplate
         this.id = entriesLength - index;
-        const attributesArray = Array.from(Object.keys(options))
-        attributesArray.map((attr) => {
+        const attributesArray = Object.keys(options)
+        attributesArray.forEach((attr) => {
             if (options[attr]) this[attr] = options[attr]
         })
         containerNode.appendChild(this)
@@ -83,7 +83,7 @@ class RandomEntry extends HTMLElement {
     set instagram(val) {
         let fetchUrl = `https://api.instagram.com/oembed?url=http://instagr.am/p/${val}/`
         const instagramPhotoNode = document.createElement('div')
-        jsonp(fetchUrl, true).then(function (data) {
+        jsonp(fetchUrl).then(function (data) {
             const imageLink = data['thumbnail_url']
             const imageNode = document.createElement('img');
             imageNode.src = imageLink;
@@ -114,20 +114,26 @@ class RandomEntry extends HTMLElement {
         const container = document.createElement('div')
         arr.map((link, idx) => {
             const linkNode = document.createElement('a');
-            const iframe = document.createElement('iframe')
             const previewBox = document.createElement('div')
-            iframe.setAttribute('width', '500px')
-            iframe.setAttribute('height', '500px')
-            iframe.setAttribute('src', link.href)
+
+            const target = link.href
+            const key = '5964d5a1a1e7b4e257179772a18e4dc9cf9280e57c56c'
+            const url = `http://api.linkpreview.net/?key=${key}&q=${target}`
+
+            jsonp(url)
+                .then(data => {
+                    console.log(data)
+
+                })
             linkNode.setAttribute('href', link.href)
             linkNode.setAttribute('rel', 'noopener noreferrer')
             linkNode.setAttribute('target', '_blank')
             linkNode.textContent = link.text
             linkNode.classList.add('preview-link')
             previewBox.classList.add('preview-box')
-            previewBox.appendChild(iframe)
+            container.classList.add('preview-container')
+            linkNode.appendChild(previewBox)
             container.appendChild(linkNode)
-            container.appendChild(previewBox)
         })
         container.classList.add('centered')
         this.shadow.appendChild(container)

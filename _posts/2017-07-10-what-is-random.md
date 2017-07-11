@@ -98,7 +98,7 @@ class RandomEntry extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         this.id = index;
-        const attributesArray = Array.from(Object.keys(options))
+        const attributesArray = Object.keys(options)
         attributesArray.map((attr) => {
             if (options[attr]) this[attr] = options[attr]
         })
