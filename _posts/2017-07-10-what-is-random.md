@@ -9,7 +9,7 @@ og_image:   what-is-random.png
 ---
 
 You may have noticed another link appeared in the header of the site saying 
-[Яandom](http://frontenderwho.rocks/random/){:target="_blank" rel="noopener noreferrer"}.
+[Яandom](/random/){:target="_blank" rel="noopener noreferrer"}.
 
 ## Yeah, what is&nbsp;this?
 
