@@ -1,21 +1,48 @@
 function jsonp(uri) {
     return new Promise(function (resolve, reject) {
-        var id = '_' + Math.round(10000 * Math.random())
-        var callbackName = 'jsonp_callback_' + id
+        const id = '_' + Math.round(10000 * Math.random())
+        const callbackName = 'jsonp_callback_' + id
         window[callbackName] = function (data) {
             delete window[callbackName]
-            var ele = document.getElementById(id)
+            const ele = document.getElementById(id)
             ele.parentNode.removeChild(ele)
             resolve(data)
         }
 
-        var src = uri + '&callback=' + callbackName
-        var script = document.createElement('script')
-        script.src = src
-        script.id = id;
+        const script = this.createElementWithProps('script', {
+            src: `${uri}&callback=${callbackName}`,
+            id
+        });
         (document.getElementsByTagName('head')[0] || document.body || document.documentElement).appendChild(script)
         script.addEventListener('error', reject)
     })
+}
+
+function createElementWithProps(tagName, props) {
+    return setProps(document.createElement(tagName), props)
+}
+
+function setProps(node, options) {
+    Object.keys(options).forEach((prop) => {
+        const value = options[prop]
+        switch (prop) {
+            case 'text':
+                node.textContent = value
+                break;
+            case 'innerHTML':
+                node.innerHTML = value
+                break;
+            case 'classListAdd':
+                value.split(' ').forEach(className => node.classList.add(className))
+                break;
+            case 'classListRemove':
+                value.split(' ').forEach(className => node.classList.remove(className))
+                break;
+            default:
+                node.setAttribute(prop, value)
+        }
+    })
+    return node;
 }
 
 const containerNode = document.querySelector('#entries')
@@ -39,61 +66,67 @@ class RandomEntry extends HTMLElement {
     }
 
     set id(val) {
-        const hashLink = document.createElement('a')
-        hashLink.classList.add('hash-link')
-        hashLink.setAttribute('href', `#${val}`)
-        hashLink.textContent = '#'
-        this.setAttribute('id', val)
-        if (val === parseInt(window.location.hash.slice(-1))) this.classList.add('highlighted')
+        const classes = (val === parseInt(window.location.hash.slice(-1))) ? 'highlighted hash-link' : 'hash-link'
+
+        const hashLink = createElementWithProps('a', {
+            classListAdd: classes,
+            href: `#${val}`,
+            text: '#',
+            id: val
+        })
         this.shadow.appendChild(hashLink)
     }
 
     set date(val) {
-        const dateNode = document.createElement('time')
-        dateNode.textContent = val
+        const dateNode = createElementWithProps('time', {text: val})
         this.shadow.appendChild(dateNode)
     }
 
     set text(val) {
-        const textNode = document.createElement('text');
-        textNode.innerHTML = val;
-        textNode.classList.add('centered');
+        const textNode = createElementWithProps('text', {
+            innerHTML: val,
+            classListAdd: 'centered'
+        })
         this.shadow.appendChild(textNode)
     }
 
     set image(val) {
-        const imageNode = document.createElement('img');
-        imageNode.src = val;
-        const imageLinkNode = document.createElement('a');
-        imageLinkNode.setAttribute('href', val)
-        imageLinkNode.classList.add('image-link', 'centered')
-        imageLinkNode.setAttribute('target', '_blank')
-        imageLinkNode.setAttribute('rel', 'noopener noreferrer')
+        const imageNode = createElementWithProps('img', {
+            src: val
+        })
+        const imageLinkNode = createElementWithProps('a', {
+            href: val,
+            classListAdd: 'image-link centered',
+            target: '_blank',
+            rel: 'noopener noreferrer'
+        })
         imageLinkNode.appendChild(imageNode)
         this.shadow.appendChild(imageLinkNode)
     }
 
     set video(val) {
-        const videoNode = document.createElement('div')
-        videoNode.classList.add('video', 'centered')
-        videoNode.innerHTML = `<div class='embed-container'><iframe src='https://www.youtube.com/embed/${val}' frameborder='0' allowfullscreen></iframe></div>`
+        const videoNode = createElementWithProps('div', {
+            classListAdd: 'video centered',
+            innerHTML: `<div class='embed-container'><iframe src='https://www.youtube.com/embed/${val}' frameborder='0' allowfullscreen></iframe></div>`
+        })
         this.shadow.appendChild(videoNode)
     }
 
     set instagram(val) {
         let fetchUrl = `https://api.instagram.com/oembed?url=http://instagr.am/p/${val}/`
-        const instagramPhotoNode = document.createElement('div')
-        jsonp(fetchUrl).then(function (data) {
+        const instagramPhotoNode = createElementWithProps('div', {classListAdd: 'instagram'})
+        jsonp(fetchUrl).then(data => {
             const imageLink = data['thumbnail_url']
-            const imageNode = document.createElement('img');
-            imageNode.src = imageLink;
-            const imageLinkNode = document.createElement('a');
+            const imageNode = createElementWithProps('img', {src: imageLink})
+
+            const imageLinkNode = createElementWithProps('a', {
+                href: `https://www.instagram.com/p/${val}/`,
+                classListAdd: 'image-link centered',
+                target: '_blank',
+                rel: 'noopener noreferrer'
+            })
             imageLinkNode.appendChild(imageNode)
-            imageLinkNode.setAttribute('href', `https://www.instagram.com/p/${val}/`)
-            imageLinkNode.classList.add('image-link', 'centered')
-            imageLinkNode.setAttribute('target', '_blank')
-            imageLinkNode.setAttribute('rel', 'noopener noreferrer')
-            instagramPhotoNode.classList.add('instagram')
+
             instagramPhotoNode.appendChild(imageLinkNode)
         })
         this.shadow.appendChild(instagramPhotoNode)
@@ -101,35 +134,39 @@ class RandomEntry extends HTMLElement {
 
     set tweet(val) {
         let fetchUrl = `https://api.twitter.com/1/statuses/oembed.json?url=${val}`
-        const tweetNode = document.createElement('div')
-        tweetNode.classList.add('tweet', 'centered')
+        const tweetNode = createElementWithProps('div', {
+            classListAdd: 'tweet centered'
+        })
         jsonp(fetchUrl).then(function (data) {
             tweetNode.innerHTML = data.html
         })
         this.shadow.appendChild(tweetNode)
     }
 
-    set links(arr) { // This live preview for <a href="http://en.wikipedia.org/">Wikipedia</a><div class="box"><iframe src="http://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div> remains open on mouseover.
+
+
+
+
+    set links(arr) {
 
         const container = document.createElement('div')
 
         arr.forEach((link, idx) => {
-            const linkNode = document.createElement('a');
-            const previewBox = document.createElement('div')
+            const linkNode = createElementWithProps('a', {
+                href: link.href,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                classListAdd: 'preview-link',
+                text: link.text
+            });
+            const previewBox = createElementWithProps('div', {
+                classListAdd: 'preview-box is-hidden'
+            })
 
-            const target = link.href
-            const key = '5964d5a1a1e7b4e257179772a18e4dc9cf9280e57c56c'
-            const url = `http://api.linkpreview.net/?key=${key}&q=${target}`
-
-            linkNode.href = target
-            linkNode.setAttribute('target', '_blank')
-            linkNode.setAttribute('rel', 'noopener noreferrer')
-            linkNode.classList.add('preview-link')
-            linkNode.textContent = link.text
             linkNode.appendChild(previewBox)
 
             const app_id = '5965421a07efcb0b00a6d42d'
-            const ogurl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(target)}?app_id=${app_id}`
+            const ogurl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(link.href)}?app_id=${app_id}`
             fetch(ogurl)
                 .then(response => response.json())
                 .then(data => {
@@ -170,7 +207,6 @@ class RandomEntry extends HTMLElement {
                     }
                 })
 
-            previewBox.classList.add('preview-box', 'is-hidden')
             container.appendChild(linkNode)
 
         })
