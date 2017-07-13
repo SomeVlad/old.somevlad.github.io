@@ -1,8 +1,11 @@
 {
   "entries": [
     {
+      "date": "13 July",
+      "text": "<a href='http://cssstats.com' target='_blank' rel='noopener noreferrer'>A tool to analyze your CSS</a>"
+    },
+    {
       "date": "11 July",
-      "text": "",
       "links": [
         {
           "href": "https://hackernoon.com/es8-was-released-and-here-are-its-main-new-features-ee9c394adf66",

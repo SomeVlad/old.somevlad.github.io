@@ -143,14 +143,8 @@ class RandomEntry extends HTMLElement {
         this.shadow.appendChild(tweetNode)
     }
 
-
-
-
-
     set links(arr) {
-
         const container = document.createElement('div')
-
         arr.forEach((link, idx) => {
             const linkNode = createElementWithProps('a', {
                 href: link.href,
@@ -176,7 +170,9 @@ class RandomEntry extends HTMLElement {
 
                     const propsArray = Object.keys(data)
                     if (!propsArray.includes('error')) {
-                        const imageSrc = data.openGraph.image.url || data.hybridGraph.image || data.htmlInferred.image_guess || ""
+                        const imageSrc = (!data.openGraph.error && data.openGraph.image.url) ||
+                            (!data.hybridGraph.error && data.hybridGraph.image) ||
+                            (!data.htmlInferred.error && data.htmlInferred.image_guess) || ""
                         const title = data.openGraph.title || data.hybridGraph.title || data.htmlInferred.title || ""
                         const description = data.openGraph.description || data.hybridGraph.description || data.htmlInferred.description || ""
 
