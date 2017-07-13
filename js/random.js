@@ -1,50 +1,3 @@
-function jsonp(uri) {
-    return new Promise(function (resolve, reject) {
-        const id = '_' + Math.round(10000 * Math.random())
-        const callbackName = 'jsonp_callback_' + id
-        window[callbackName] = function (data) {
-            delete window[callbackName]
-            const ele = document.getElementById(id)
-            ele.parentNode.removeChild(ele)
-            resolve(data)
-        }
-
-        const script = this.createElementWithProps('script', {
-            src: `${uri}&callback=${callbackName}`,
-            id
-        });
-        (document.getElementsByTagName('head')[0] || document.body || document.documentElement).appendChild(script)
-        script.addEventListener('error', reject)
-    })
-}
-
-function createElementWithProps(tagName, props) {
-    return setProps(document.createElement(tagName), props)
-}
-
-function setProps(node, options) {
-    Object.keys(options).forEach((prop) => {
-        const value = options[prop]
-        switch (prop) {
-            case 'text':
-                node.textContent = value
-                break;
-            case 'innerHTML':
-                node.innerHTML = value
-                break;
-            case 'classListAdd':
-                value.split(' ').forEach(className => node.classList.add(className))
-                break;
-            case 'classListRemove':
-                value.split(' ').forEach(className => node.classList.remove(className))
-                break;
-            default:
-                node.setAttribute(prop, value)
-        }
-    })
-    return node;
-}
-
 const containerNode = document.querySelector('#entries')
 const entryStyleTemplate = containerNode.querySelector('#random-entry-style')
 
@@ -68,7 +21,7 @@ class RandomEntry extends HTMLElement {
     set id(val) {
         const classes = (val === parseInt(window.location.hash.slice(-1))) ? 'highlighted hash-link' : 'hash-link'
 
-        const hashLink = createElementWithProps('a', {
+        const hashLink = this.createElementWithProps('a', {
             classListAdd: classes,
             href: `#${val}`,
             text: '#',
@@ -78,12 +31,12 @@ class RandomEntry extends HTMLElement {
     }
 
     set date(val) {
-        const dateNode = createElementWithProps('time', {text: val})
+        const dateNode = this.createElementWithProps('time', {text: val})
         this.shadow.appendChild(dateNode)
     }
 
     set text(val) {
-        const textNode = createElementWithProps('text', {
+        const textNode = this.createElementWithProps('text', {
             innerHTML: val,
             classListAdd: 'centered'
         })
@@ -91,10 +44,10 @@ class RandomEntry extends HTMLElement {
     }
 
     set image(val) {
-        const imageNode = createElementWithProps('img', {
+        const imageNode = this.createElementWithProps('img', {
             src: val
         })
-        const imageLinkNode = createElementWithProps('a', {
+        const imageLinkNode = this.createElementWithProps('a', {
             href: val,
             classListAdd: 'image-link centered',
             target: '_blank',
@@ -105,7 +58,7 @@ class RandomEntry extends HTMLElement {
     }
 
     set video(val) {
-        const videoNode = createElementWithProps('div', {
+        const videoNode = this.createElementWithProps('div', {
             classListAdd: 'video centered',
             innerHTML: `<div class='embed-container'><iframe src='https://www.youtube.com/embed/${val}' frameborder='0' allowfullscreen></iframe></div>`
         })
@@ -114,12 +67,12 @@ class RandomEntry extends HTMLElement {
 
     set instagram(val) {
         let fetchUrl = `https://api.instagram.com/oembed?url=http://instagr.am/p/${val}/`
-        const instagramPhotoNode = createElementWithProps('div', {classListAdd: 'instagram'})
-        jsonp(fetchUrl).then(data => {
+        const instagramPhotoNode = this.createElementWithProps('div', {classListAdd: 'instagram'})
+        this.jsonp(fetchUrl).then(data => {
             const imageLink = data['thumbnail_url']
-            const imageNode = createElementWithProps('img', {src: imageLink})
+            const imageNode = this.createElementWithProps('img', {src: imageLink})
 
-            const imageLinkNode = createElementWithProps('a', {
+            const imageLinkNode = this.createElementWithProps('a', {
                 href: `https://www.instagram.com/p/${val}/`,
                 classListAdd: 'image-link centered',
                 target: '_blank',
@@ -134,10 +87,10 @@ class RandomEntry extends HTMLElement {
 
     set tweet(val) {
         let fetchUrl = `https://api.twitter.com/1/statuses/oembed.json?url=${val}`
-        const tweetNode = createElementWithProps('div', {
+        const tweetNode = this.createElementWithProps('div', {
             classListAdd: 'tweet centered'
         })
-        jsonp(fetchUrl).then(function (data) {
+        this.jsonp(fetchUrl).then(function (data) {
             tweetNode.innerHTML = data.html
         })
         this.shadow.appendChild(tweetNode)
@@ -146,14 +99,14 @@ class RandomEntry extends HTMLElement {
     set links(arr) {
         const container = document.createElement('div')
         arr.forEach((link, idx) => {
-            const linkNode = createElementWithProps('a', {
+            const linkNode = this.createElementWithProps('a', {
                 href: link.href,
                 target: '_blank',
                 rel: 'noopener noreferrer',
                 classListAdd: 'preview-link',
                 text: link.text
             });
-            const previewBox = createElementWithProps('div', {
+            const previewBox = this.createElementWithProps('div', {
                 classListAdd: 'preview-box is-hidden'
             })
 
@@ -208,6 +161,53 @@ class RandomEntry extends HTMLElement {
         })
         container.classList.add('preview-container', 'centered')
         this.shadow.appendChild(container)
+    }
+
+    jsonp(uri) {
+        return new Promise((resolve, reject) => {
+            const id = '_' + Math.round(10000 * Math.random())
+            const callbackName = 'jsonp_callback_' + id
+            window[callbackName] = function (data) {
+                delete window[callbackName]
+                const ele = document.getElementById(id)
+                ele.parentNode.removeChild(ele)
+                resolve(data)
+            }
+
+            const script = this.createElementWithProps('script', {
+                src: `${uri}&callback=${callbackName}`,
+                id
+            });
+            (document.getElementsByTagName('head')[0] || document.body || document.documentElement).appendChild(script)
+            script.addEventListener('error', reject)
+        })
+    }
+
+    createElementWithProps(tagName, props) {
+        return this.setProps(document.createElement(tagName), props)
+    }
+
+    setProps(node, options) {
+        Object.keys(options).forEach((prop) => {
+            const value = options[prop]
+            switch (prop) {
+                case 'text':
+                    node.textContent = value
+                    break;
+                case 'innerHTML':
+                    node.innerHTML = value
+                    break;
+                case 'classListAdd':
+                    value.split(' ').forEach(className => node.classList.add(className))
+                    break;
+                case 'classListRemove':
+                    value.split(' ').forEach(className => node.classList.remove(className))
+                    break;
+                default:
+                    node.setAttribute(prop, value)
+            }
+        })
+        return node;
     }
 }
 
