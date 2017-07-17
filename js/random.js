@@ -207,7 +207,7 @@ class MetaRetriever {
         return new Promise((resolve, reject) => {
             this.retrieveSimple(this.url)
                 .then(meta => {
-                    if (!meta.description || !meta.title || !meta.imageSrc) {
+                    if (!meta || !meta.description || !meta.title || !meta.imageSrc) {
                         this.retrieveFromOpenGraph(this.url, meta)
                             .then(ogMeta => resolve(ogMeta))
                     }
@@ -216,7 +216,7 @@ class MetaRetriever {
         })
     }
 
-    retrieveFromOpenGraph(url, parsedMeta) {
+    retrieveFromOpenGraph(url, parsedMeta = {}) {
         const app_id = '5965421a07efcb0b00a6d42d'
         const urlToFetch = `https://opengraph.io/api/1.1/site/${url}?app_id=${app_id}`
 
@@ -248,6 +248,7 @@ class MetaRetriever {
                     description: data.ogDescription || data.twitterDescription || data.description || ""
                 }
             })
+            .catch(console.error)
 
     }
 }
