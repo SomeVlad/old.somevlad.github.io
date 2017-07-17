@@ -112,48 +112,35 @@ class RandomEntry extends HTMLElement {
 
             linkNode.appendChild(previewBox)
 
-            const app_id = '5965421a07efcb0b00a6d42d'
-            const ogurl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(link.href)}?app_id=${app_id}`
-            fetch(ogurl)
-                .then(response => response.json())
+            new MetaRetriever(link.href).getMeta
                 .then(data => {
-                    let type = '';
+                    let type = 'wide';
                     const descriptionNode = document.createElement('div')
                     const titleNode = document.createElement('div')
 
-                    const propsArray = Object.keys(data)
-                    if (!propsArray.includes('error')) {
-                        const imageSrc = (!data.openGraph.error && data.openGraph.image.url) ||
-                            (!data.hybridGraph.error && data.hybridGraph.image) ||
-                            (!data.htmlInferred.error && data.htmlInferred.image_guess) || ""
-                        const title = data.openGraph.title || data.hybridGraph.title || data.htmlInferred.title || ""
-                        const description = data.openGraph.description || data.hybridGraph.description || data.htmlInferred.description || ""
+                    if (data.imageSrc) {
+                        const imageNode = new Image()
+                        imageNode.src = data.imageSrc
+                        imageNode.addEventListener("load", function () {
+                            type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
+                        });
+                        previewBox.appendChild(imageNode)
 
-                        if (imageSrc) {
-                            const imageNode = new Image()
-                            imageNode.src = imageSrc
-                            imageNode.addEventListener("load", function () {
-                                type = ((this.naturalWidth / this.naturalHeight > 1.5) ? 'wide' : 'tall')
-                                previewBox.classList.add(type)
-                            });
-                            previewBox.appendChild(imageNode)
-
-                        }
-                        if (title) {
-                            titleNode.textContent = title
-                            titleNode.classList.add('link-title')
-                            previewBox.appendChild(titleNode)
-                        }
-
-                        if (description) {
-                            descriptionNode.textContent = description
-                            descriptionNode.classList.add('link-description')
-                            previewBox.appendChild(descriptionNode)
-                        }
-
-
-                        previewBox.classList.remove('is-hidden')
                     }
+                    if (data.title) {
+                        titleNode.textContent = data.title
+                        titleNode.classList.add('link-title')
+                        previewBox.appendChild(titleNode)
+                    }
+
+                    if (data.description) {
+                        descriptionNode.textContent = data.description
+                        descriptionNode.classList.add('link-description')
+                        previewBox.appendChild(descriptionNode)
+                    }
+
+                    previewBox.classList.add(type)
+                    previewBox.classList.remove('is-hidden')
                 })
 
             container.appendChild(linkNode)
@@ -211,6 +198,60 @@ class RandomEntry extends HTMLElement {
     }
 }
 
+class MetaRetriever {
+    constructor(url) {
+        this.url = encodeURIComponent(url)
+    }
+
+    get getMeta() {
+        return new Promise((resolve, reject) => {
+            this.retrieveSimple(this.url)
+                .then(meta => {
+                    if (!meta.description || !meta.title || !meta.imageSrc) {
+                        this.retrieveFromOpenGraph(this.url, meta)
+                            .then(ogMeta => resolve(ogMeta))
+                    }
+                    else resolve(meta)
+                })
+        })
+    }
+
+    retrieveFromOpenGraph(url, parsedMeta) {
+        const app_id = '5965421a07efcb0b00a6d42d'
+        const urlToFetch = `https://opengraph.io/api/1.1/site/${url}?app_id=${app_id}`
+
+        return fetch(urlToFetch)
+            .then(response => response.json())
+            .then(data => {
+                const propsArray = Object.keys(data)
+                // if (!propsArray.includes('error')) {
+                    return {
+                        imageSrc: parsedMeta.imageSrc || (!data.openGraph.error && data.openGraph.image.url) ||
+                        (!data.hybridGraph.error && data.hybridGraph.image) ||
+                        (!data.htmlInferred.error && data.htmlInferred.image_guess) || "",
+                        title: parsedMeta.title || data.openGraph.title || data.hybridGraph.title || data.htmlInferred.title || "",
+                        description: parsedMeta.description || data.openGraph.description ||
+                        data.hybridGraph.description || data.htmlInferred.description || ""
+                    }
+                // }
+            })
+    }
+
+    retrieveSimple(url) {
+        const fetchUrl = `http://82.196.4.230:1488/?url=${url}`
+        return fetch(fetchUrl)
+            .then(response => response.json())
+            .then(data => {
+                return {
+                    imageSrc: data.ogImage || data.twitterImageSrc || "",
+                    title: data.ogTitle || data.title || "",
+                    description: data.ogDescription || data.twitterDescription || data.description || ""
+                }
+            })
+
+    }
+}
+
 customElements.define('random-entry', RandomEntry);
 
 const reqUrl = '/data/random.json'
@@ -218,4 +259,4 @@ const reqUrl = '/data/random.json'
 fetch(reqUrl)
     .then(response => response.json())
     .then(data => data.entries.map((entry, idx) => new RandomEntry(entry, idx, data.entries.length)))
-    .catch(console.log);
+    .catch(console.error);

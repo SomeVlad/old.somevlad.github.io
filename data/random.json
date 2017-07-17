@@ -11,7 +11,12 @@
     },
     {
       "date": "13 July",
-      "text": "<a href='http://cssstats.com' target='_blank' rel='noopener noreferrer'>A tool to analyze your CSS</a>"
+      "links": [
+        {
+          "href": "http://cssstats.com",
+          "text": "A tool to analyze your CSS"
+        }
+      ]
     },
     {
       "date": "11 July",
