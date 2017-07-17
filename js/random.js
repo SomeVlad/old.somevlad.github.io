@@ -6,7 +6,8 @@ class RandomEntry extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         this.style = entryStyleTemplate
-        this.id = entriesLength - index;
+        this.id = 'n' + (entriesLength - index);
+
         const attributesArray = Object.keys(options)
         attributesArray.forEach((attr) => {
             if (options[attr]) this[attr] = options[attr]
@@ -19,13 +20,15 @@ class RandomEntry extends HTMLElement {
     }
 
     set id(val) {
-        const classes = (val === parseInt(window.location.hash.slice(-1))) ? 'highlighted hash-link' : 'hash-link'
-
+        this.setProps(this, {
+            id: val,
+            classListAdd: (val === window.location.hash.slice(1)) ? 'highlighted' : ''
+        })
         const hashLink = this.createElementWithProps('a', {
-            classListAdd: classes,
+            classListAdd: 'hash-link',
             href: `#${val}`,
-            text: '#',
-            id: val
+            text: '#'
+            // id: val
         })
         this.shadow.appendChild(hashLink)
     }
@@ -177,21 +180,23 @@ class RandomEntry extends HTMLElement {
     setProps(node, options) {
         Object.keys(options).forEach((prop) => {
             const value = options[prop]
-            switch (prop) {
-                case 'text':
-                    node.textContent = value
-                    break;
-                case 'innerHTML':
-                    node.innerHTML = value
-                    break;
-                case 'classListAdd':
-                    value.split(' ').forEach(className => node.classList.add(className))
-                    break;
-                case 'classListRemove':
-                    value.split(' ').forEach(className => node.classList.remove(className))
-                    break;
-                default:
-                    node.setAttribute(prop, value)
+            if (value) {
+                switch (prop) {
+                    case 'text':
+                        node.textContent = value
+                        break;
+                    case 'innerHTML':
+                        node.innerHTML = value
+                        break;
+                    case 'classListAdd':
+                        value.split(' ').forEach(className => node.classList.add(className))
+                        break;
+                    case 'classListRemove':
+                        value.split(' ').forEach(className => node.classList.remove(className))
+                        break;
+                    default:
+                        node.setAttribute(prop, value)
+                }
             }
         })
         return node;
