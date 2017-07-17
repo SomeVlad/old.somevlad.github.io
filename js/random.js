@@ -238,7 +238,7 @@ class MetaRetriever {
     }
 
     retrieveSimple(url) {
-        const fetchUrl = `http://82.196.4.230:1488/?url=${url}`
+        const fetchUrl = `https://82.196.4.230:1488/?url=${url}`
         return fetch(fetchUrl)
             .then(response => response.json())
             .then(data => {
