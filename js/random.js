@@ -28,7 +28,6 @@ class RandomEntry extends HTMLElement {
             classListAdd: 'hash-link',
             href: `#${val}`,
             text: '#'
-            // id: val
         })
         this.shadow.appendChild(hashLink)
     }
@@ -243,7 +242,7 @@ class MetaRetriever {
     }
 
     retrieveSimple(url) {
-        const fetchUrl = `https://82.196.4.230:1488/?url=${url}`
+        const fetchUrl = `https://kek.uno:1488/?url=${url}`
         return fetch(fetchUrl)
             .then(response => response.json())
             .then(data => {
@@ -254,7 +253,6 @@ class MetaRetriever {
                 }
             })
             .catch(console.error)
-
     }
 }
 
