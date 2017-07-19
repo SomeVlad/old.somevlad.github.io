@@ -8,6 +8,10 @@ tags: about
 
 👨🏻‍💻
 
+Currently working in [Avito](https://avito.ru/){:target="_blank" rel="noopener noreferrer"}.
+
+Really into frontend, love nodejs, interested in docker.
+
 
 ### Buzzwords I know of
 - react

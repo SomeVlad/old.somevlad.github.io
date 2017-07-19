@@ -242,7 +242,7 @@ class MetaRetriever {
     }
 
     retrieveSimple(url) {
-        const fetchUrl = `https://kek.uno:1488/?url=${url}`
+        const fetchUrl = `https://kek.uno:14088/?url=${url}`
         return fetch(fetchUrl)
             .then(response => response.json())
             .then(data => {
