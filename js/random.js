@@ -226,32 +226,27 @@ class MetaRetriever {
 
         return fetch(urlToFetch)
             .then(response => response.json())
-            .then(data => {
-                const propsArray = Object.keys(data)
-                // if (!propsArray.includes('error')) {
-                    return {
-                        imageSrc: parsedMeta.imageSrc || (!data.openGraph.error && data.openGraph.image.url) ||
-                        (!data.hybridGraph.error && data.hybridGraph.image) ||
-                        (!data.htmlInferred.error && data.htmlInferred.image_guess) || "",
-                        title: parsedMeta.title || data.openGraph.title || data.hybridGraph.title || data.htmlInferred.title || "",
-                        description: parsedMeta.description || data.openGraph.description ||
-                        data.hybridGraph.description || data.htmlInferred.description || ""
-                    }
-                // }
-            })
+            .then(data => ({
+                    imageSrc: parsedMeta.imageSrc || (!data.openGraph.error && data.openGraph.image.url) ||
+                    (!data.hybridGraph.error && data.hybridGraph.image) ||
+                    (!data.htmlInferred.error && data.htmlInferred.image_guess) || "",
+                    title: parsedMeta.title || data.openGraph.title || data.hybridGraph.title || data.htmlInferred.title || "",
+                    description: parsedMeta.description || data.openGraph.description ||
+                    data.hybridGraph.description || data.htmlInferred.description || ""
+                })
+            )
     }
 
     retrieveSimple(url) {
         const fetchUrl = `https://kek.uno:14088/?url=${url}`
         return fetch(fetchUrl)
             .then(response => response.json())
-            .then(data => {
-                return {
+            .then(data => ({
                     imageSrc: data.ogImage || data.twitterImageSrc || "",
                     title: data.ogTitle || data.title || "",
                     description: data.ogDescription || data.twitterDescription || data.description || ""
-                }
-            })
+                })
+            )
             .catch(console.error)
     }
 }
