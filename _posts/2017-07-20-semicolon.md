@@ -44,7 +44,9 @@ Like... At all.
 
 Seriously. Just pick an option that is ok in your team and stick with it.
 
-But as far as I can tell from my experience there is a common
+# But there is a problem
+
+As far as I can tell from my experience there is a common
 misconception about so-called ASI --- automatic semicolon insertion ---
 in javascript.
 
@@ -82,9 +84,7 @@ so here is another revelation:
 
 ![Shock](/images/shock.gif "Shock")
 
-That's right.
-
-There it is:
+That's right. In front of brackets.
 
 1.1 If a line starts with round brackets:
 ```js
@@ -105,7 +105,10 @@ const a = 'a semicolon maybe?' + q
  // Cannot read property 'join' of undefined
  ```
 
----------
-Do not be afraid of something you don’t know.
-Find&nbsp;out&nbsp;about&nbsp;it. <br>
+To avoid that you can actually just prepend this line with semicolon.
+
+-----------------
+So my idea basically: <br>
+Do not be afraid of something you don’t know.<br>
+Find out about it. <br>
 You are an engineer, not an animal.
