@@ -36,7 +36,7 @@ The truth about semicolons is that...
 <br>
 <br>
 
-# THERE IS NO FREAKING DIFFERENCE
+<span class='h1'>THERE IS NO FREAKING DIFFERENCE</span>
 
 Like... At all.
 
@@ -44,7 +44,7 @@ Like... At all.
 
 Seriously. Just pick an option that is ok in your team and stick with it.
 
-# But there is a problem
+## But there is a problem
 
 As far as I can tell from my experience there is a common
 misconception about so-called ASI --- automatic semicolon insertion ---
@@ -56,11 +56,11 @@ Some people tend to think it may cause errors in a javascript code.
 
 Where do these statements come from?
 
-# Ignorance
+<span class='h1'>Ignorance</span>
 
 [This talk](https://www.destroyallsoftware.com/talks/wat){:target="_blank" rel="noopener noreferrer"},
 for example. All of this derived from lack of understanding
-how javascript actually works. How does plus operator works,
+how javascript actually works. How does plus operator work,
 how its type conversion works, what is `ToPrimitive`, how parser and
 interpreter analyze code.
 
@@ -77,10 +77,10 @@ overcome their inner animal.
 
 -------
 
-I guess, you have rested from the shock of the **THE ULTIMATE ANSWER**,
+I guess, you have rested from the shock of the **THE&nbsp;ULTIMATE&nbsp;ANSWER**,
 so here is another revelation:
 
-# THERE IS ONLY ONE CASE WHEN YOU REALLY NEED SEMICOLON
+<span class='h1'>THERE IS ONLY ONE CASE WHEN YOU REALLY NEED SEMICOLON</span>
 
 ![Shock](/images/shock.gif "Shock")
 
@@ -88,13 +88,13 @@ That's right. In front of brackets.
 
 1.1 If a line starts with round brackets:
 ```js
-const q = 'what am I missing?'
-const a = 'a semicolon maybe?' + q
+const a = 'a semicolon maybe?'
+const q = 'what am I missing? ' + a
 (function() {
     // ...
 })()
 
-// q is not a function
+// a is not a function
 ```
 
 1.2 If a line starts with square brackets:
