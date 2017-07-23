@@ -1,6 +1,15 @@
 {
   "entries": [
     {
+      "date": "23 July",
+      "links": [
+        {
+          "href": "https://medium.engineering/typography-is-impossible-5872b0c7f891",
+          "text": "The best article on typography in web."
+        }
+      ]
+    },
+    {
       "date": "20 July",
       "text": "How to become rich as a frontend developer: <ul><li>Become a frontend developer</li><li>Git gud</li><li>Implement service workers on your site</li><li>Congratulations! Now you have a distributed network for mining bitcoins.</li></ul>"
     },
