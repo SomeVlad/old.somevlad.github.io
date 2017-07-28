@@ -2,6 +2,15 @@
   "entries": [
     {
       "date": "28 July",
+      "links": [
+        {
+          "href": "https://francisstokes.wordpress.com/2017/07/20/16-bit-vm-in-javascript/",
+          "text": "How to build VM running in node."
+        }
+      ]
+    },
+    {
+      "date": "28 July",
       "text": "Good talk.",
       "video": "pjr6VJdDcHQ"
     },
