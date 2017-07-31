@@ -128,7 +128,17 @@ number is prime.
 
 1. `reduce` - implement the `reduce` function.
 
-    Nah.
+    ```js
+    if (!Array.isArray(array)) return new Error('Not an array')
+    if (array.length === 0) return accumulator
+
+    // if there is anything to reduce, pass the reduce function an array without first element,
+    // a callback, and new accumulator which is the result of a callback function with
+    // initial accumulator and a first element of an array
+    else return this.reduce(array.slice(1), callback, callback(accumulator, array[0]))
+    ```
+
+     reduce([<span contenteditable='true' class='reduce' edit>1, 2, 3, 4</span>], (a, b) => a + b, 0)<span class='result reduce' />
 
 1. `reverse` - reverses the given string (yes, using the built in `reverse` function is cheating).
 
