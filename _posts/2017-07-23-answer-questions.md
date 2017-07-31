@@ -31,8 +31,8 @@ og_image:   answers.png
 Wandering around the internet I've stumbled upon another
 ["list of things each frontender should know"](https://performancejs.com/post/hde6d32/The-Best-List-of-Frontend-JavaScript-Interview-Questions-(written-by-a-Frontend-Engineer)){:target="_blank" rel="noopener noreferrer"}.
 At first I wanted to write a topic with my opinion on such lists,
-but then I decided not to do that, and instead just complete the coding
-tasks. Most of them I've already seen while passing interviews, and I
+but then I decided not to do that, and just complete the coding
+tasks instead. Most of them I've already seen while passing interviews, and I
 thought it would be handy to have it all done at once
 so I have my code samples on hand.
 
@@ -50,12 +50,15 @@ number is prime.
     function isPrime(num) {
         if (!Number.isInteger(num) || num < 1) return new Error('Not a positive integer')
         if (num > Number.MAX_SAFE_INTEGER) return new Error('Too big value')
+
+        // all primes are of the form 6k ± 1, with the exception of 2 and 3
+        // so we only need to test if n is divisible by 2 or 3
+        // then to check through all the numbers of form 6k ± 1 < √n
         if (num < 3) return num === 2
         if (num % 2 === 0 || num % 3 === 0) return false
 
         for (let i = 5; i * i < num; i += 6) {
-            if (num % i === 0)
-                return false
+            if (num % i === 0) return false
         }
         return true
     }
@@ -91,15 +94,15 @@ number is prime.
 1. `isSorted` - returns `true` or `false`, indicating whether the given array of numbers is sorted.
 
     ```js
-    // ascending order, I guess
     function (array) {
+        // Infinity and NaN won't work because of JSON.parse
+        // if there is no parsing involved everything will be ok
         if (!Array.isArray(array)) return new Error('Not an array')
         const length = array.length
         if (length > 1) {
+            // "sorted" means ascending order, I guess
             for (let i = 0; i < length - 1; i++) {
-                if (array[i] > array[i + 1]) {
-                    return false;
-                }
+                if (array[i] > array[i + 1]) return false
             }
         }
         return true
@@ -188,27 +191,31 @@ Can you do it in O(N) time? Hint: There’s a clever formula you can use.
     function (str) {
         if (typeof str !== 'string') return new Error('Bad input')
         str = str.replace(/[^(){}\[\]]+/g, '')
-            const conformity = {
-                '(': ')',
-                '{': '}',
-                '[': ']'
+        const conformity = {
+            '(': ')',
+            '{': '}',
+            '[': ']'
+        }
+
+        if (str.length === 0) return true
+        if (str.length % 2 !== 0) return false
+        const stack = []
+
+        for (let i = 0; i < str.length; i++) {
+            // if a char is an opening bracket
+            if (str[i] in conformity) {
+                // then put it into stack
+                stack.push(str[i])
             }
+            // if a char is a closing bracket
+            // then pull the last opening bracket
+            // and check if it's corresponding to the current char
+            else if (conformity[stack.pop()] !== str[i]) return false
+        }
 
-            if (str.length === 0) return true
-            if (str.length % 2 > 0) return false
-            const stack = []
-
-            for (let i = 0; i < str.length; i++) {
-                if (str[i] in conformity) {
-                    stack.push(str[i])
-                }
-                else if (Object.values(conformity).includes(str[i]) && stack.length > 0) {
-                    if (conformity[stack.pop()] !== str[i]) return false
-                }
-                else return false
-            }
-
-            return stack.length === 0
+        // stack is empty – all good
+        // and vice versa
+        return stack.length === 0
     }
     ```
 

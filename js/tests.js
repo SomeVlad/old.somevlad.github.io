@@ -4,12 +4,15 @@
             num = +num
             if (!Number.isInteger(num) || num < 1) return new Error('Not a positive integer')
             if (num > Number.MAX_SAFE_INTEGER) return new Error('Too big value')
+
+            // all primes are of the form 6k ± 1, with the exception of 2 and 3
+            // so we only need to test if n is divisible by 2 or 3
+            // then to check through all the numbers of form 6k ± 1 < √n
             if (num < 3) return num === 2
             if (num % 2 === 0 || num % 3 === 0) return false
 
             for (let i = 5; i * i < num; i += 6) {
-                if (num % i === 0)
-                    return false
+                if (num % i === 0) return false
             }
             return true
         },
@@ -22,6 +25,7 @@
 
         fib: function (num) {
             num = +num
+            // with a simple memoization
             if (!Number.isInteger(num) || num < 1) return new Error('Not a positive integer')
             if (!this.cache) this.cache = {}
             if (!this.cache[num]) this.cache[num] = num < 3 ? 1 : this.fib(num - 1) + this.fib(num - 2)
@@ -36,13 +40,14 @@
                 new Error('Bad input')
             }
 
+            // Infinity and NaN won't work because of JSON.parse
+            // if there is no parsing involved everything will be ok
             if (!Array.isArray(array)) return new Error('Not an array')
             const length = array.length
             if (length > 1) {
+                // "sorted" means ascending order, I guess
                 for (let i = 0; i < length - 1; i++) {
-                    if (array[i] > array[i + 1]) {
-                        return false
-                    }
+                    if (array[i] > array[i + 1]) return false
                 }
             }
             return true
@@ -116,19 +121,23 @@
             }
 
             if (str.length === 0) return true
-            if (str.length % 2 > 0) return false
+            if (str.length % 2 !== 0) return false
             const stack = []
 
             for (let i = 0; i < str.length; i++) {
+                // if a char is an opening bracket
                 if (str[i] in conformity) {
+                    // then put it into stack
                     stack.push(str[i])
                 }
-                else if (Object.values(conformity).includes(str[i]) && stack.length > 0) {
-                    if (conformity[stack.pop()] !== str[i]) return false
-                }
-                else return false
+                // if a char is a closing bracket
+                // then pull the last opening bracket
+                // and check if it's corresponding to the current char
+                else if (conformity[stack.pop()] !== str[i]) return false
             }
 
+            // stack is empty – all good
+            // and vice versa
             return stack.length === 0
         }
     }
