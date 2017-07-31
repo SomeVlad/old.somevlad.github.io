@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Several typical js&nbsp;tasks&nbsp;–&nbsp;pt.&nbsp;I
+title:      Several typical js tasks – pt. I
 date:       2017-07-31 06:00:00
 summary:    Maybe one day this post will save me some time on an interview.
 permalink:  /answers/
