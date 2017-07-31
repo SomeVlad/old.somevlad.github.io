@@ -125,7 +125,6 @@ class RandomEntry extends HTMLElement {
                         imageNode.src = data.imageSrc
                         imageNode.addEventListener("load", function () {
                             if (this.naturalWidth / this.naturalHeight < 1.5) {
-                                console.log('tall')
                                 previewBox.classList.remove('wide')
                                 previewBox.classList.add('tall')
                             }
