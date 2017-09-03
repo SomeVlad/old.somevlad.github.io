@@ -2,7 +2,7 @@
 layout:     post
 title:      Several typical js tasks – pt. II
 date:       2017-07-31 06:00:00
-summary:    Maybe one day this post will save me some time on an interview.
+summary:    Maybe one day this post will save me even more time on an interview.
 permalink:  /more-answers/
 tags:       js frontend
 og_image:   more-answers.png
