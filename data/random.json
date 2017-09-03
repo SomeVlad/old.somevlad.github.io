@@ -1,6 +1,33 @@
 {
   "entries": [
     {
+      "date": "25 August",
+      "links": [
+        {
+          "href": "https://github.com/jwasham/google-interview-university",
+          "text": "Hacker News: «...this is a perfect resource for someone who hasn't had a formal education in computer science»."
+        }
+      ]
+    },
+    {
+      "date": "25 August",
+      "links": [
+        {
+          "href": "https://medium.com/dev-channel/increase-your-web-development-skill-set-150-animated-tips-on-chrome-devtools-4a30155e6b8e",
+          "text": "GIFs about how to be more effective with Chrome DevTools."
+        }
+      ]
+    },
+    {
+      "date": "25 August",
+      "links": [
+        {
+          "href": "https://github.com/alex/what-happens-when",
+          "text": "An ultimate explanation of what happens when you type google.com into browser's address bar and press enter."
+        }
+      ]
+    },
+    {
       "date": "28 July",
       "links": [
         {
