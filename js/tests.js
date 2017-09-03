@@ -1,4 +1,4 @@
-(function () {
+{
     const tests = {
         isPrime: function (num) {
             num = +num
@@ -35,8 +35,7 @@
         isSorted: function (array) {
             try {
                 array = JSON.parse(`[ ${array} ]`)
-            }
-            catch (error) {
+            } catch (error) {
                 new Error('Bad input')
             }
 
@@ -56,8 +55,7 @@
         filter: function (array, callback = n => n < 3) {
             try {
                 array = JSON.parse(`[ ${array} ]`)
-            }
-            catch (error) {
+            } catch (error) {
                 return new Error('Bad input')
             }
             if (!Array.isArray(array)) return new Error('Not an array')
@@ -72,8 +70,7 @@
         reduce: function (array, callback = (a, b) => a + b, accumulator = 0) {
             try {
                 array = JSON.parse(`[ ${array} ]`)
-            }
-            catch (error) {
+            } catch (error) {
                 return new Error('Bad input')
             }
             if (!Array.isArray(array)) return new Error('Not an array')
@@ -94,8 +91,7 @@
         indexOf: function (array, elementToFind = 3) {
             try {
                 array = JSON.parse(`[ ${array} ]`)
-            }
-            catch (error) {
+            } catch (error) {
                 return new Error('Bad input')
             }
             if (!Array.isArray(array)) return new Error('Not an array')
@@ -116,8 +112,7 @@
         missing: function (array) {
             try {
                 array = JSON.parse(`[ ${array} ]`)
-            }
-            catch (error) {
+            } catch (error) {
                 return new Error('Bad input')
             }
             if (!Array.isArray(array)) return new Error('Not an array')
@@ -156,6 +151,109 @@
             // stack is empty – all good
             // and vice versa
             return stack.length === 0
+        },
+
+        uniq: function (array) {
+            try {
+                array = JSON.parse(`[ ${array} ]`)
+            } catch (error) {
+                return new Error('Bad input')
+            }
+            if (!Array.isArray(array)) return new Error('Not an array')
+
+            return Array.from(new Set(array))
+        },
+
+        intersection: function (firstArray, secondArray = [900, 3, 7, 4]) {
+            try {
+                firstArray = JSON.parse(`[ ${firstArray} ]`)
+            } catch (error) {
+                return new Error('Bad input')
+            }
+            if (!Array.isArray(firstArray)) return new Error('Not an array')
+
+            // first find `uniq` numbers in both arrays
+            const uniqFirst = this.uniq(firstArray)
+            const uniqSecond = this.uniq(secondArray)
+
+            // and return filtered array of elements found in both arrays
+            return uniqFirst.length < uniqSecond.length ?
+                uniqFirst.filter(num => uniqSecond.includes(num)) :
+                uniqSecond.filter(num => uniqFirst.includes(num))
+        },
+
+        sort: function (array) {
+            try {
+                array = JSON.parse(`[ ${array} ]`)
+            } catch (error) {
+                return new Error('Bad input')
+            }
+            if (!Array.isArray(array)) return new Error('Not an array')
+
+            function merge(listR, listL) {
+                const output = []
+                while (listL.length && listR.length) {
+                    listL[0] < listR[0] ? output.push(listL.shift()) : output.push(listR.shift())
+                }
+                return output.concat(listL).concat(listR)
+            }
+
+            if (array.length < 2) return array
+
+            const pivot = Math.floor(array.length / 2)
+            const listL = array.slice(0, pivot)
+            const listR = array.slice(pivot)
+
+            return merge(this.sort(listL), this.sort(listR))
+        },
+
+        includes: function (array, number = 9) {
+            try {
+                array = JSON.parse(`[ ${array} ]`)
+            } catch (error) {
+                return new Error('Bad input')
+            }
+            if (!Array.isArray(array)) return new Error('Not an array')
+            if (array.length < 2) return array[0] === number
+
+            let low = 0
+            let high = array.length - 1
+            while (low <= high) {
+                if (high === low) return array[low] === number
+                const guessedIndex = Math.floor((low + high) / 2)
+                if (array[guessedIndex] === number) return true
+                array[guessedIndex] > number ? high = guessedIndex - 1 : low = guessedIndex + 1
+            }
+        },
+
+        assignDeep: function (target, ...sources) {
+            // check if nothing left to merge the target with
+            if (!sources.length) return target
+
+            // take first source from sources...
+            const source = sources.shift()
+
+            // ...and for each of its keys...
+            Object.keys(source).map(key => {
+                // ...if this key is an object...
+                if (isObject(source[key])) {
+                    // ...put this key if there is no such key in the target object
+                    // and merge these two objects deeply
+                    if (!target[key]) Object.assign(target, {[key]: {}})
+                    this.assignDeep(target[key], source[key])
+                    // if this key is not an object
+                } else {
+                    // just merge them the simple way
+                    Object.assign(target, {[key]: source[key]})
+                }
+            })
+
+            // then repeat procedure with all the remaining sources
+            return this.assignDeep(target, ...sources)
+
+            function isObject(item) {
+                return (item && typeof item === 'object');
+            }
         }
     }
 
@@ -164,7 +262,6 @@
         if (testName === 'site') return
         const value = input.textContent
         const resultNode = document.querySelector(`span.result.${testName}`)
-
         resultNode.textContent = tests[testName](value)
     }
 
@@ -182,4 +279,17 @@
             calculate(event.target)
         }
     })
-})()
+
+    const expandedLog = obj => JSON.stringify(obj, true, 2)
+
+    // assignDeep showcase
+    console.log('______deep merge______')
+    const target = {a: {b: {c: 1}}}
+    const sourceOne = {a: {b: {d: 2}}, e: 3}
+    const sourceTwo = {a: {b: {f: 4}}, e: 3}
+    console.log(`target is ${expandedLog(target)}\n
+first source is ${expandedLog(sourceOne)} \n
+second source is ${expandedLog(sourceTwo)} \n\n
+result is ${expandedLog(tests.assignDeep(target, sourceOne, sourceTwo))}`)
+}
+
