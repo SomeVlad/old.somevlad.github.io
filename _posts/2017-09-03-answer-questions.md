@@ -34,7 +34,7 @@ according to [this](https://performancejs.com/post/hde6d32/The-Best-List-of-Fron
 ![Shitty whiteboard questions](/images/og/more-answers.png)
 
 I'm kinda lazy to do the last two tasks, and syndrome of incomplete action
-`const`antly doesn't `let` me sleep at night for a `while`, so I decided to publish all I've got
+`const`antly doesn't `let` me sleep at night `for` a `while`, so I decided to publish all I've got
 at this moment. Enjoy.
 
 ### Implement the following functions:
