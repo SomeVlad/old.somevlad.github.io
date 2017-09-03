@@ -31,6 +31,8 @@ og_image:   more-answers.png
 This is the second part (first is [here](/answers/)) of things "each frontender should know"
 according to [this](https://performancejs.com/post/hde6d32/The-Best-List-of-Frontend-JavaScript-Interview-Questions-(written-by-a-Frontend-Engineer)){:target="_blank" rel="noopener noreferrer"}) topic.
 
+![Shitty whiteboard questions](/images/og/more-answers.png)
+
 I'm kinda lazy to do the last two tasks, and syndrome of incomplete action
 doesn't let me sleep at night for a while, so I decided to publish all I've got
 at this moment. Enjoy.
