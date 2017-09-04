@@ -29,7 +29,7 @@ og_image:   more-answers.png
 </style>
 
 This is the second part (first is [here](/answers/)) of things "each frontender should know"
-according to [this](https://performancejs.com/post/hde6d32/The-Best-List-of-Frontend-JavaScript-Interview-Questions-(written-by-a-Frontend-Engineer)){:target="_blank" rel="noopener noreferrer"}) topic.
+according to [this](https://performancejs.com/post/hde6d32/The-Best-List-of-Frontend-JavaScript-Interview-Questions-(written-by-a-Frontend-Engineer)){:target="_blank" rel="noopener noreferrer"} topic.
 
 ![Shitty whiteboard questions](/images/og/more-answers.png)
 
@@ -110,7 +110,7 @@ at this moment. Enjoy.
 
     sort([<span contenteditable='true' class='sort' edit>3, 2, 1</span>])<span class='result sort' />
 
-1. `includes` - implement the sort function to sort an array of numbers in `O(N×log(N))` time.
+1. `includes` - return `true` or `false` indicating whether the given number appears in the given sorted array. Can you do it in `O(log(N))` time?
 
     Let's apply divide and conquer paradigm.
     1. We can do dichotomous division of an initial array,
