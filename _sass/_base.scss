@@ -33,35 +33,24 @@ body {
   -webkit-box-sizing: border-box;
 }
 
-
-// .home {
-//   position: relative;
-//   .lang-switch {
-//     position: absolute;
-//     top: -40px;
-//     label[for='lang_all'] {
-//       font-size: 0.7em;
-//     }
-//     ul {
-//       margin: 0;
-//       padding: 0;
-//       li {
-//         display: inline;
-//         font-size: 0.7em;
-//         label {
-//           cursor: pointer;
-//         }
-//         &:not(:last-of-type):after {
-//           content: "|";
-//           margin-left: 0.6em;
-//         }
-//       }
-//     }
-//   }
-// }
-
-
-// .home > input[name='language'][value='en']:checked ~ .posts > .post:not(.en),
-// .home > input[name='language'][value='ru']:checked ~ .posts > .post:not(.ru) {
-//   display: none;
-// } 
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  width: 190px;
+  height: 43px;
+  background: transparent url(/images/ugly.png) center -16px no-repeat;
+  box-sizing: border-box;
+  z-index: 1;
+  pointer-events: none;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media only screen and (orientation: landscape) and (max-width: 767px) {
+  body:before {
+    left: 0;
+    top: calc(190px + 50%);
+    transform-origin: left top;
+    transform: rotate(-90deg) translateX(50%);
+  }
+}
