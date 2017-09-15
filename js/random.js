@@ -116,19 +116,12 @@ class RandomEntry extends HTMLElement {
 
             new MetaRetriever(link.href).getMeta
                 .then(data => {
-                    let type = 'wide';
                     const descriptionNode = document.createElement('div')
                     const titleNode = document.createElement('div')
 
                     if (data.imageSrc) {
                         const imageNode = new Image()
                         imageNode.src = data.imageSrc
-                        imageNode.addEventListener("load", function () {
-                            if (this.naturalWidth / this.naturalHeight < 1.5) {
-                                previewBox.classList.remove('wide')
-                                previewBox.classList.add('tall')
-                            }
-                        });
                         previewBox.appendChild(imageNode)
 
                     }
@@ -143,8 +136,6 @@ class RandomEntry extends HTMLElement {
                         descriptionNode.classList.add('link-description')
                         previewBox.appendChild(descriptionNode)
                     }
-
-                    previewBox.classList.add(type)
                     previewBox.classList.remove('is-hidden')
                 })
 
