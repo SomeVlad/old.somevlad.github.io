@@ -159,19 +159,22 @@ permalink: /random/
                 color: #333;
                 font-size: 0.8em;
                 overflow: hidden;
-                max-height: 6.1ch;
+            }
+
+            .preview-box .link-description.partly-hidden {
+                max-height: 9ch;
                 position: relative;
             }
 
-            .preview-box .link-description::after {
+            .preview-box .link-description.partly-hidden::after {
                 content: '';
                 display: block;
-                background-image: linear-gradient(to bottom, transparent -19px, black 261px);
+                background-image: linear-gradient(to bottom, transparent 0, white 54px);
                 position: absolute;
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                height: 15px;
+                height: 42px;
             }
 
             .preview-box img {
