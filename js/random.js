@@ -134,6 +134,7 @@ class RandomEntry extends HTMLElement {
                     if (data.description) {
                         descriptionNode.textContent = data.description
                         descriptionNode.classList.add('link-description')
+                        if (data.description.length > 220) descriptionNode.classList.add('partly-hidden')
                         previewBox.appendChild(descriptionNode)
                     }
                     previewBox.classList.remove('is-hidden')
