@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import LanguageSwitcher from 'LanguageSwitcher'
+import LanguageSwitcher from './LanguageSwitcher'
 import './App.css'
 
 class App extends Component {
