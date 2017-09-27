@@ -4,13 +4,22 @@
       "date": "26 September",
       "links": [
         {
+          "href": "https://github.com/mr-mig/every-programmer-should-know",
+          "text": "Yet another list of things everyone should know to pass an interview."
+        }
+      ]
+    },
+    {
+      "date": "26 September",
+      "links": [
+        {
           "href": "https://webdesign.tutsplus.com/tutorials/intriguing-css-level-4-selectors--cms-29499",
           "text": "Praying for :scope 🙏 "
         }
       ]
     },
     {
-      "date": "5 September", 
+      "date": "5 September",
       "links": [
         {
           "href": "http://bigocheatsheet.com/",
