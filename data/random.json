@@ -1,6 +1,16 @@
 {
   "entries": [
     {
+      "date": "11 October",
+      "text": "Today in the company I am working for a proposal was raised: how about adding a rule that 'data-' attributes must go after all the standard ones. Here are exactly my thoughts on this 👇 ",
+      "links": [
+        {
+          "href": "http://mrmrs.github.io/writing/2016/04/26/dogma/",
+          "text": "Let's stop tying up cats."
+        }
+      ]
+    }, 
+    {
       "date": "26 September",
       "links": [
         {
